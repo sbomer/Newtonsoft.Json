@@ -24,7 +24,6 @@
 #endregion
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 
@@ -63,7 +62,7 @@ namespace Newtonsoft.Json.Converters
 
         /// <summary>
         /// Gets or sets the culture used when converting a date to and from JSON.
-        /// </summary> 
+        /// </summary>
         /// <value>The culture used when converting a date to and from JSON.</value>
         public CultureInfo Culture
         {

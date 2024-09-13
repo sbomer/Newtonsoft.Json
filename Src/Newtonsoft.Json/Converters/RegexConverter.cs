@@ -37,7 +37,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a <see cref="Regex"/> to and from JSON and BSON.
     /// </summary>
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Regex Deserialize
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class RegexConverter : JsonConverter
     {
         private const string PatternName = "Pattern";
@@ -171,7 +171,6 @@ namespace Newtonsoft.Json.Converters
             throw JsonSerializationException.Create(reader, "Regex pattern must be enclosed by slashes.");
         }
 
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private Regex ReadRegexObject(JsonReader reader, JsonSerializer serializer)
         {
             string? pattern = null;

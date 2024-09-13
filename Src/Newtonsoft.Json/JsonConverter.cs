@@ -25,9 +25,9 @@
 
 using System;
 using Newtonsoft.Json.Utilities;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Newtonsoft.Json
 {

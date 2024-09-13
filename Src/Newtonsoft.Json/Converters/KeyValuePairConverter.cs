@@ -35,7 +35,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a <see cref="KeyValuePair{TKey,TValue}"/> to and from JSON.
     /// </summary>
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Serialize/Deserialize
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class KeyValuePairConverter : JsonConverter
     {
         private const string KeyName = "Key";
@@ -43,14 +43,7 @@ namespace Newtonsoft.Json.Converters
 
         private static readonly ThreadSafeStore<Type, ReflectionObject> ReflectionObjectPerType = new ThreadSafeStore<Type, ReflectionObject>(InitializeReflectionObject);
 
-        private static ReflectionObject InitializeReflectionObject(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
-                DynamicallyAccessedMemberTypes.PublicFields |
-                DynamicallyAccessedMemberTypes.PublicNestedTypes |
-                DynamicallyAccessedMemberTypes.PublicProperties |
-                DynamicallyAccessedMemberTypes.PublicEvents |
-                DynamicallyAccessedMemberTypes.PublicMethods)]
-            Type t)
+        private static ReflectionObject InitializeReflectionObject(Type t)
         {
             IList<Type> genericArguments = t.GetGenericArguments();
             Type keyType = genericArguments[0];

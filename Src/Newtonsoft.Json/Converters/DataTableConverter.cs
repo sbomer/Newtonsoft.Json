@@ -38,7 +38,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a <see cref="DataTable"/> to and from JSON.
     /// </summary>
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Activator.CreateInstance
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class DataTableConverter : JsonConverter
     {
         /// <summary>

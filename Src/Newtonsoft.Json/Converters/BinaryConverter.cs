@@ -39,7 +39,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a binary value to and from a base 64 string value.
     /// </summary>
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // EnsureReflectionObject
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class BinaryConverter : JsonConverter
     {
 #if HAVE_LINQ
@@ -89,14 +89,7 @@ namespace Newtonsoft.Json.Converters
         }
 
 #if HAVE_LINQ
-        private static void EnsureReflectionObject(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
-                DynamicallyAccessedMemberTypes.PublicFields |
-                DynamicallyAccessedMemberTypes.PublicNestedTypes |
-                DynamicallyAccessedMemberTypes.PublicProperties |
-                DynamicallyAccessedMemberTypes.PublicEvents |
-                DynamicallyAccessedMemberTypes.PublicMethods)]
-            Type t)
+        private static void EnsureReflectionObject(Type t)
         {
             if (_reflectionObject == null)
             {

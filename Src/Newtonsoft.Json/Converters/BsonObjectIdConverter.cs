@@ -25,7 +25,6 @@
 
 using System;
 using Newtonsoft.Json.Bson;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 
