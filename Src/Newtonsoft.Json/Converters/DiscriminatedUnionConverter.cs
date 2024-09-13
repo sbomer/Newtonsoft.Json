@@ -44,7 +44,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a F# discriminated union type to and from JSON.
     /// </summary>
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Overrides CanConvert with RUC
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // ToObject
     public class DiscriminatedUnionConverter : JsonConverter
     {
         #region UnionDefinition
@@ -126,7 +126,6 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             if (value == null)
@@ -169,7 +168,6 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
@@ -260,7 +258,6 @@ namespace Newtonsoft.Json.Converters
         /// <returns>
         /// 	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
         /// </returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override bool CanConvert(Type objectType)
         {
             if (typeof(IEnumerable).IsAssignableFrom(objectType))
