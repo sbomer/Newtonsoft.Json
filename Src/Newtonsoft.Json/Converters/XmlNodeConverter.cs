@@ -460,7 +460,7 @@ namespace Newtonsoft.Json.Converters
         public override string? LocalName => "DOCTYPE";
     }
 
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // RUC interface impl cof IXmlNode
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XDocumentWrapper : XContainerWrapper, IXmlDocument
     {
         private XDocument Document => (XDocument)WrappedNode!;
@@ -665,7 +665,7 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Incompatible interface impl
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XContainerWrapper : XObjectWrapper
     {
         private List<IXmlNode>? _childNodes;
@@ -772,7 +772,7 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // use of XmlNodeConverter forces RUC in implementation of interface
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XObjectWrapper : IXmlNode
     {
         private readonly XObject? _xmlObject;
@@ -954,7 +954,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts XML to and from JSON.
     /// </summary>
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // overrides CanConvert with DAM
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class XmlNodeConverter : JsonConverter
     {
         internal static readonly List<IXmlNode> EmptyChildNodes = new List<IXmlNode>();

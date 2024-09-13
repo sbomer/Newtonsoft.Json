@@ -130,7 +130,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string serializedString = JsonConvert.SerializeObject(inputContext, jsonSerializerSettings);
 
             StringAssert.AreEqual(@"{
-  ""$type"": """ + ReflectionUtils.GetTypeName(typeof(Dictionary<string, Guid>), 0, DefaultSerializationBinder.Instance) + @""",
+  ""$type"": """ + ReflectionUtils.GetTypeName(typeof(Dictionary<string, Guid>), 0, DefaultSerializationBinder.Statics.Instance) + @""",
   ""k1"": ""5dd2dba0-20c0-49f8-a054-1fa3b0a8d774""
 }", serializedString);
 
@@ -161,7 +161,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Longitude"": -117.766684,
   ""TimeStamp"": ""2000-03-01T23:59:59Z"",
   ""Payload"": {
-    ""$type"": """ + ReflectionUtils.GetTypeName(typeof(byte[]), 0, DefaultSerializationBinder.Instance) + @""",
+    ""$type"": """ + ReflectionUtils.GetTypeName(typeof(byte[]), 0, DefaultSerializationBinder.Statics.Instance) + @""",
     ""$value"": ""AAECAwQFBgcICQ==""
   }
 }", jsonString);

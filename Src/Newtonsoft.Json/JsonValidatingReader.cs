@@ -55,7 +55,7 @@ namespace Newtonsoft.Json
     /// </note>
     /// </summary>
     [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
-    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // overrides JsonReader.Read with call to RUC ValidateCurrentToken.
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class JsonValidatingReader : JsonReader, IJsonLineInfo
     {
         private class SchemaScope
@@ -381,7 +381,6 @@ namespace Newtonsoft.Json
         /// Reads the next JSON token from the underlying <see cref="JsonReader"/> as a <see cref="Nullable{T}"/> of <see cref="Int32"/>.
         /// </summary>
         /// <returns>A <see cref="Nullable{T}"/> of <see cref="Int32"/>.</returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override int? ReadAsInt32()
         {
             int? i = _reader.ReadAsInt32();
@@ -396,7 +395,6 @@ namespace Newtonsoft.Json
         /// <returns>
         /// A <see cref="Byte"/>[] or <c>null</c> if the next JSON token is null.
         /// </returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override byte[] ReadAsBytes()
         {
             byte[] data = _reader.ReadAsBytes();
@@ -409,7 +407,6 @@ namespace Newtonsoft.Json
         /// Reads the next JSON token from the underlying <see cref="JsonReader"/> as a <see cref="Nullable{T}"/> of <see cref="Decimal"/>.
         /// </summary>
         /// <returns>A <see cref="Nullable{T}"/> of <see cref="Decimal"/>.</returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override decimal? ReadAsDecimal()
         {
             decimal? d = _reader.ReadAsDecimal();
@@ -422,7 +419,6 @@ namespace Newtonsoft.Json
         /// Reads the next JSON token from the underlying <see cref="JsonReader"/> as a <see cref="Nullable{T}"/> of <see cref="Double"/>.
         /// </summary>
         /// <returns>A <see cref="Nullable{T}"/> of <see cref="Double"/>.</returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override double? ReadAsDouble()
         {
             double? d = _reader.ReadAsDouble();
@@ -435,7 +431,6 @@ namespace Newtonsoft.Json
         /// Reads the next JSON token from the underlying <see cref="JsonReader"/> as a <see cref="Nullable{T}"/> of <see cref="Boolean"/>.
         /// </summary>
         /// <returns>A <see cref="Nullable{T}"/> of <see cref="Boolean"/>.</returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override bool? ReadAsBoolean()
         {
             bool? b = _reader.ReadAsBoolean();
@@ -448,7 +443,6 @@ namespace Newtonsoft.Json
         /// Reads the next JSON token from the underlying <see cref="JsonReader"/> as a <see cref="String"/>.
         /// </summary>
         /// <returns>A <see cref="String"/>. This method will return <c>null</c> at the end of an array.</returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override string ReadAsString()
         {
             string s = _reader.ReadAsString();
@@ -461,7 +455,6 @@ namespace Newtonsoft.Json
         /// Reads the next JSON token from the underlying <see cref="JsonReader"/> as a <see cref="Nullable{T}"/> of <see cref="DateTime"/>.
         /// </summary>
         /// <returns>A <see cref="Nullable{T}"/> of <see cref="DateTime"/>. This method will return <c>null</c> at the end of an array.</returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override DateTime? ReadAsDateTime()
         {
             DateTime? dateTime = _reader.ReadAsDateTime();
@@ -475,7 +468,6 @@ namespace Newtonsoft.Json
         /// Reads the next JSON token from the underlying <see cref="JsonReader"/> as a <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>.
         /// </summary>
         /// <returns>A <see cref="Nullable{T}"/> of <see cref="DateTimeOffset"/>.</returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override DateTimeOffset? ReadAsDateTimeOffset()
         {
             DateTimeOffset? dateTimeOffset = _reader.ReadAsDateTimeOffset();
@@ -491,7 +483,6 @@ namespace Newtonsoft.Json
         /// <returns>
         /// <c>true</c> if the next token was read successfully; <c>false</c> if there are no more tokens to read.
         /// </returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override bool Read()
         {
             if (!_reader.Read())
@@ -508,7 +499,6 @@ namespace Newtonsoft.Json
             return true;
         }
 
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void ValidateCurrentToken()
         {
             // first time validate has been called. build model
@@ -626,7 +616,6 @@ namespace Newtonsoft.Json
             }
         }
 
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void WriteToken(IList<JsonSchemaModel> schemas)
         {
             foreach (SchemaScope schemaScope in _stack)

@@ -5796,7 +5796,7 @@ Path '', line 1, position 1.");
   ""Longitude"": -117.766684,
   ""TimeStamp"": ""2000-03-01T23:59:59Z"",
   ""Payload"": {
-    ""$type"": """ + ReflectionUtils.GetTypeName(typeof(byte[]), 0, DefaultSerializationBinder.Instance) + @""",
+    ""$type"": """ + ReflectionUtils.GetTypeName(typeof(byte[]), 0, DefaultSerializationBinder.Statics.Instance) + @""",
     ""$value"": ""AAECAwQFBgcICQ==""
   }
 }", jsonString);
