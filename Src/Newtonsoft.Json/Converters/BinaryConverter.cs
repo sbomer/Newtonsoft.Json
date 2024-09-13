@@ -25,6 +25,7 @@
 
 #if HAVE_LINQ || HAVE_ADO_NET
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             if (value == null)
@@ -87,7 +89,14 @@ namespace Newtonsoft.Json.Converters
         }
 
 #if HAVE_LINQ
-        private static void EnsureReflectionObject(Type t)
+        private static void EnsureReflectionObject(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
+                DynamicallyAccessedMemberTypes.PublicFields |
+                DynamicallyAccessedMemberTypes.PublicNestedTypes |
+                DynamicallyAccessedMemberTypes.PublicProperties |
+                DynamicallyAccessedMemberTypes.PublicEvents |
+                DynamicallyAccessedMemberTypes.PublicMethods)]
+            Type t)
         {
             if (_reflectionObject == null)
             {
@@ -104,6 +113,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)

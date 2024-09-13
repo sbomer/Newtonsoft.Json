@@ -26,6 +26,8 @@
 #if HAVE_BINARY_SERIALIZATION
 using System;
 using System.Runtime.Serialization;
+using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
 {
@@ -44,6 +46,7 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonISerializableContract"/> class.
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonISerializableContract(Type underlyingType)
             : base(underlyingType)
         {

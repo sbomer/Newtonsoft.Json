@@ -26,6 +26,7 @@
 #if !(NET20 || NET35)
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System;
@@ -187,7 +188,9 @@ namespace Newtonsoft.Json.Utilities
             return callExpression;
         }
 
-        public override Func<T> CreateDefaultConstructor<T>(Type type)
+        public override Func<T> CreateDefaultConstructor<T>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+            Type type)
         {
             ValidationUtils.ArgumentNotNull(type, "type");
 

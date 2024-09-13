@@ -31,6 +31,7 @@ using System.Collections.Concurrent;
 using Newtonsoft.Json.Schema;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 #if HAVE_DYNAMIC
 using System.Dynamic;
 #endif
@@ -45,6 +46,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -58,6 +60,7 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Used by <see cref="JsonSerializer"/> to resolve a <see cref="JsonContract"/> for a given <see cref="System.Type"/>.
     /// </summary>
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class DefaultContractResolver : IContractResolver
     {
         private static readonly IContractResolver _instance = new DefaultContractResolver();
@@ -173,6 +176,7 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultContractResolver"/> class.
         /// </summary>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public DefaultContractResolver()
         {
 #if HAVE_BINARY_SERIALIZATION
@@ -222,6 +226,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">The type to get serializable members for.</param>
         /// <returns>The serializable members for the type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual List<MemberInfo> GetSerializableMembers(Type objectType)
         {
             bool ignoreSerializableAttribute;
@@ -337,6 +342,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonObjectContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonObjectContract CreateObjectContract(Type objectType)
         {
             JsonObjectContract contract = new JsonObjectContract(objectType);
@@ -439,6 +445,7 @@ namespace Newtonsoft.Json.Serialization
             throw new JsonSerializationException("Unable to serialize instance of '{0}'.".FormatWith(CultureInfo.InvariantCulture, o.GetType()));
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private MemberInfo? GetExtensionDataMemberForType(Type type)
         {
             IEnumerable<MemberInfo> members = GetClassHierarchyForType(type).SelectMany(baseType =>
@@ -488,6 +495,7 @@ namespace Newtonsoft.Json.Serialization
             return extensionDataMember;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static void SetExtensionDataDelegates(JsonObjectContract contract, MemberInfo member)
         {
             JsonExtensionDataAttribute? extensionDataAttribute = ReflectionUtils.GetAttribute<JsonExtensionDataAttribute>(member);
@@ -684,6 +692,7 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="constructor">The constructor to create properties for.</param>
         /// <param name="memberProperties">The type's member properties.</param>
         /// <returns>Properties for the given <see cref="ConstructorInfo"/>.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual IList<JsonProperty> CreateConstructorParameters(ConstructorInfo constructor, JsonPropertyCollection memberProperties)
         {
             ParameterInfo[] constructorParameters = constructor.GetParameters();
@@ -740,6 +749,7 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="matchingMemberProperty">The matching member property.</param>
         /// <param name="parameterInfo">The constructor parameter.</param>
         /// <returns>A created <see cref="JsonProperty"/> for the given <see cref="ParameterInfo"/>.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonProperty CreatePropertyFromConstructorParameter(JsonProperty? matchingMemberProperty, ParameterInfo parameterInfo)
         {
             JsonProperty property = new JsonProperty();
@@ -779,6 +789,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>The contract's default <see cref="JsonConverter" />.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonConverter? ResolveContractConverter(Type objectType)
         {
             return JsonTypeReflector.GetJsonConverter(objectType);
@@ -792,6 +803,7 @@ namespace Newtonsoft.Json.Serialization
 #if NET35
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Portability", "CA1903:UseOnlyApiFromTargetedFramework", MessageId = "System.Runtime.Serialization.DataContractAttribute.#get_IsReference()")]
 #endif
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void InitializeContract(JsonContract contract)
         {
             JsonContainerAttribute? containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(contract.NonNullableUnderlyingType);
@@ -1006,6 +1018,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonDictionaryContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonDictionaryContract CreateDictionaryContract(Type objectType)
         {
             JsonDictionaryContract contract = new JsonDictionaryContract(objectType);
@@ -1055,6 +1068,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonArrayContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonArrayContract CreateArrayContract(Type objectType)
         {
             JsonArrayContract contract = new JsonArrayContract(objectType);
@@ -1093,6 +1107,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonPrimitiveContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonPrimitiveContract CreatePrimitiveContract(Type objectType)
         {
             JsonPrimitiveContract contract = new JsonPrimitiveContract(objectType);
@@ -1106,6 +1121,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonLinqContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonLinqContract CreateLinqContract(Type objectType)
         {
             JsonLinqContract contract = new JsonLinqContract(objectType);
@@ -1120,6 +1136,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonISerializableContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonISerializableContract CreateISerializableContract(Type objectType)
         {
             JsonISerializableContract contract = new JsonISerializableContract(objectType);
@@ -1146,6 +1163,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonDynamicContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonDynamicContract CreateDynamicContract(Type objectType)
         {
             JsonDynamicContract contract = new JsonDynamicContract(objectType);
@@ -1173,6 +1191,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonStringContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonStringContract CreateStringContract(Type objectType)
         {
             JsonStringContract contract = new JsonStringContract(objectType);
@@ -1186,6 +1205,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>A <see cref="JsonContract"/> for the given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonContract CreateContract(Type objectType)
         {
             Type t = ReflectionUtils.EnsureNotByRefType(objectType);
@@ -1365,6 +1385,7 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="type">The type to create properties for.</param>
         /// /// <param name="memberSerialization">The member serialization mode for the type.</param>
         /// <returns>Properties for the given <see cref="JsonContract"/>.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             List<MemberInfo> members = GetSerializableMembers(type);
@@ -1436,6 +1457,7 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="memberSerialization">The member's parent <see cref="MemberSerialization"/>.</param>
         /// <param name="member">The member to create a <see cref="JsonProperty"/> for.</param>
         /// <returns>A created <see cref="JsonProperty"/> for the given <see cref="MemberInfo"/>.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected virtual JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             JsonProperty property = new JsonProperty();
@@ -1471,6 +1493,7 @@ namespace Newtonsoft.Json.Serialization
             return property;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void SetPropertySettingsFromAttributes(JsonProperty property, object attributeProvider, string name, Type declaringType, MemberSerialization memberSerialization, out bool allowNonPublicAccess)
         {
 #if HAVE_DATA_CONTRACTS

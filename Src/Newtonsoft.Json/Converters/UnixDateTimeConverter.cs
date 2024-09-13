@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 
@@ -73,6 +74,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             long seconds;
@@ -108,6 +110,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing property value of the JSON that is being converted.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             bool nullable = ReflectionUtils.IsNullable(objectType);

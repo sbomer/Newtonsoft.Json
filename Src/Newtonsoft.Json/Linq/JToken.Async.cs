@@ -26,6 +26,7 @@
 #if HAVE_ASYNC
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public virtual Task WriteToAsync(JsonWriter writer, CancellationToken cancellationToken, params JsonConverter[] converters)
         {
             throw new NotImplementedException();
@@ -53,6 +55,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public Task WriteToAsync(JsonWriter writer, params JsonConverter[] converters)
         {
             return WriteToAsync(writer, default, converters);

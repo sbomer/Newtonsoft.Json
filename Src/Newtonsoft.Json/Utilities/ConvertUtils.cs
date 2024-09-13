@@ -256,24 +256,68 @@ namespace Newtonsoft.Json.Utilities
 #endif
         }
 
-        private static readonly ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?> CastConverters =
-            new ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?>(CreateCastConverter);
-
-        private static Func<object?, object?>? CreateCastConverter(StructMultiKey<Type, Type> t)
+        internal readonly struct StructTypeTypeKey : IEquatable<StructTypeTypeKey>
         {
-            Type initialType = t.Value1;
-            Type targetType = t.Value2;
-            MethodInfo? castMethodInfo = targetType.GetMethod("op_Implicit", new[] { initialType })
-                ?? targetType.GetMethod("op_Explicit", new[] { initialType });
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            public readonly Type Value1;
 
-            if (castMethodInfo == null)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            public readonly Type Value2;
+
+            public StructTypeTypeKey(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type v1,
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type v2)
             {
-                return null;
+                Value1 = v1;
+                Value2 = v2;
             }
 
-            MethodCall<object?, object?> call = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(castMethodInfo);
+            public override int GetHashCode()
+            {
+                return (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0);
+            }
 
-            return o => call(null, o);
+            public override bool Equals(object? obj)
+            {
+                if (!(obj is StructTypeTypeKey key))
+                {
+                    return false;
+                }
+
+                return Equals(key);
+            }
+
+            public bool Equals(StructTypeTypeKey other)
+            {
+                return (Equals(Value1, other.Value1) && Equals(Value2, other.Value2));
+            }
+        }
+
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        private static class Statics
+        {
+            public static readonly ThreadSafeStore<StructTypeTypeKey, Func<object?, object?>?> CastConverters =
+                new ThreadSafeStore<StructTypeTypeKey, Func<object?, object?>?>(CreateCastConverter);
+
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+            private static Func<object?, object?>? CreateCastConverter(StructTypeTypeKey t)
+            {
+                Type initialType = t.Value1;
+                Type targetType = t.Value2;
+                MethodInfo? castMethodInfo = targetType.GetMethod("op_Implicit", new[] { initialType })
+                    ?? targetType.GetMethod("op_Explicit", new[] { initialType });
+
+                if (castMethodInfo == null)
+                {
+                    return null;
+                }
+
+                MethodCall<object?, object?> call = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(castMethodInfo);
+
+                return o => call(null, o);
+            }
         }
 
 #if HAVE_BIG_INTEGER
@@ -369,6 +413,7 @@ namespace Newtonsoft.Json.Utilities
             NoValidConversion = 3
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static object Convert(object initialValue, CultureInfo culture, Type targetType)
         {
             switch (TryConvertInternal(initialValue, culture, targetType, out object? value))
@@ -386,6 +431,7 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static bool TryConvert(object? initialValue, CultureInfo culture, Type targetType, out object? value)
         {
             try
@@ -405,6 +451,7 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // TypeDescriptor
         private static ConvertResult TryConvertInternal(object? initialValue, CultureInfo culture, Type targetType, out object? value)
         {
             if (initialValue == null)
@@ -587,6 +634,7 @@ namespace Newtonsoft.Json.Utilities
         /// The converted type. If conversion was unsuccessful, the initial value
         /// is returned if assignable to the target type.
         /// </returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static object? ConvertOrCast(object? initialValue, CultureInfo culture, Type targetType)
         {
             if (targetType == typeof(object))
@@ -607,6 +655,7 @@ namespace Newtonsoft.Json.Utilities
             return EnsureTypeAssignable(initialValue, ReflectionUtils.GetObjectType(initialValue)!, targetType);
         }
 #endregion
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
 
         private static object? EnsureTypeAssignable(object? value, Type initialType, Type targetType)
         {
@@ -619,7 +668,7 @@ namespace Newtonsoft.Json.Utilities
                     return value;
                 }
 
-                Func<object?, object?>? castConverter = CastConverters.Get(new StructMultiKey<Type, Type>(valueType, targetType));
+                Func<object?, object?>? castConverter = Statics.CastConverters.Get(new StructTypeTypeKey(valueType, targetType));
                 if (castConverter != null)
                 {
                     return castConverter(value);

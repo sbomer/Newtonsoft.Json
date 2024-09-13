@@ -34,6 +34,8 @@ using System.Security.Permissions;
 #endif
 using Newtonsoft.Json.Utilities;
 using System.Runtime.CompilerServices;
+using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -67,12 +69,14 @@ namespace Newtonsoft.Json.Serialization
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
 #endif
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static T? GetCachedAttribute<T>(object attributeProvider) where T : Attribute
         {
             return CachedAttributeGetter<T>.GetAttribute(attributeProvider);
         }
 
 #if HAVE_TYPE_DESCRIPTOR
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // TypeDescriptor
         public static bool CanTypeDescriptorConvertString(Type type, out TypeConverter typeConverter)
         {
             typeConverter = TypeDescriptor.GetConverter(type);
@@ -97,6 +101,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
 #if HAVE_DATA_CONTRACTS
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static DataContractAttribute? GetDataContractAttribute(Type type)
         {
             // DataContractAttribute does not have inheritance
@@ -116,6 +121,7 @@ namespace Newtonsoft.Json.Serialization
             return null;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static DataMemberAttribute? GetDataMemberAttribute(MemberInfo memberInfo)
         {
             // DataMemberAttribute does not have inheritance
@@ -152,6 +158,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static MemberSerialization GetObjectMemberSerialization(Type objectType, bool ignoreSerializableAttribute)
         {
             JsonObjectAttribute? objectAttribute = GetCachedAttribute<JsonObjectAttribute>(objectType);
@@ -179,6 +186,7 @@ namespace Newtonsoft.Json.Serialization
             return MemberSerialization.OptOut;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static JsonConverter? GetJsonConverter(object attributeProvider)
         {
             JsonConverterAttribute? converterAttribute = GetCachedAttribute<JsonConverterAttribute>(attributeProvider);
@@ -228,7 +236,9 @@ namespace Newtonsoft.Json.Serialization
             return containerAttribute.NamingStrategyInstance;
         }
 
-        private static Func<object[]?, object> GetCreator(Type type)
+        private static Func<object[]?, object> GetCreator(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+            Type type)
         {
             Func<object>? defaultConstructor = (ReflectionUtils.HasDefaultConstructor(type, false))
                 ? ReflectionDelegateFactory.CreateDefaultConstructor<object>(type)
@@ -309,7 +319,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
-        private static T? GetAttribute<T>(Type type) where T : Attribute
+        private static T? GetAttribute<T>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type) where T : Attribute
         {
             T? attribute;
 
@@ -343,6 +353,7 @@ namespace Newtonsoft.Json.Serialization
             return null;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static T? GetAttribute<T>(MemberInfo memberInfo) where T : Attribute
         {
             T? attribute;
@@ -424,6 +435,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static T? GetAttribute<T>(object provider) where T : Attribute
         {
             if (provider is Type type)

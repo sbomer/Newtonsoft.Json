@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Utilities;
 
@@ -57,6 +58,7 @@ namespace Newtonsoft.Json.Schema
         /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
         [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static bool IsValid(this JToken source, JsonSchema schema)
         {
             bool valid = true;
@@ -79,6 +81,7 @@ namespace Newtonsoft.Json.Schema
         /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
         [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static bool IsValid(this JToken source, JsonSchema schema, out IList<string> errorMessages)
         {
             IList<string> errors = new List<string>();
@@ -100,6 +103,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
         /// <param name="schema">The schema to test with.</param>
         [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static void Validate(this JToken source, JsonSchema schema)
         {
             source.Validate(schema, null);
@@ -117,6 +121,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="schema">The schema to test with.</param>
         /// <param name="validationEventHandler">The validation event handler.</param>
         [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static void Validate(this JToken source, JsonSchema schema, ValidationEventHandler validationEventHandler)
         {
             ValidationUtils.ArgumentNotNull(source, nameof(source));

@@ -25,6 +25,7 @@
 
 #if HAVE_DYNAMIC
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Utilities;
@@ -72,6 +73,7 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonDynamicContract"/> class.
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonDynamicContract(Type underlyingType)
             : base(underlyingType)
         {

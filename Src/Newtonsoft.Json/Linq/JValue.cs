@@ -727,6 +727,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/>s which will be used when writing the token.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
         {
             if (converters != null && converters.Length > 0 && _value != null)
@@ -970,13 +971,24 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// The <see cref="DynamicMetaObject"/> to bind this object.
         /// </returns>
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected override DynamicMetaObject GetMetaObject(Expression parameter)
         {
+#if HAVE_APPCONTEXT
+            if (!MiscellaneousUtils.SerializationIsSupported)
+            {
+                throw new NotSupportedException("MetaObject not supported"); // TODO
+            }
+#endif
+#pragma warning disable IL2026
             return new DynamicProxyMetaObject<JValue>(parameter, this, new JValueDynamicProxy());
+#pragma warning restore IL2026
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private class JValueDynamicProxy : DynamicProxy<JValue>
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             public override bool TryConvert(JValue instance, ConvertBinder binder, [NotNullWhen(true)]out object? result)
             {
                 if (binder.Type == typeof(JValue) || binder.Type == typeof(JToken))
@@ -1186,9 +1198,18 @@ namespace Newtonsoft.Json.Linq
             return (DateTime)this;
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         object IConvertible.ToType(Type conversionType, IFormatProvider? provider)
         {
+#if HAVE_APPCONTEXT
+            if (!MiscellaneousUtils.SerializationIsSupported)
+            {
+                throw new NotSupportedException("Serialization is not supported.");
+            }
+#endif
+#pragma warning disable IL2026
             return ToObject(conversionType)!;
+#pragma warning restore IL2026
         }
 #endif
     }

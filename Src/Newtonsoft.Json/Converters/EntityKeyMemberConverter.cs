@@ -26,6 +26,7 @@
 #if HAVE_ENTITY_FRAMEWORK
 using System;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using System.Diagnostics;
@@ -35,6 +36,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts an Entity Framework <see cref="T:System.Data.EntityKeyMember"/> to and from JSON.
     /// </summary>
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Overrides CanConvert with RUC implementation
     public class EntityKeyMemberConverter : JsonConverter
     {
         private const string EntityKeyMemberFullTypeName = "System.Data.EntityKeyMember";
@@ -51,6 +53,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             if (value == null)
@@ -114,6 +117,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             EnsureReflectionObject(objectType);
@@ -140,7 +144,14 @@ namespace Newtonsoft.Json.Converters
             return entityKeyMember;
         }
 
-        private static void EnsureReflectionObject(Type objectType)
+        private static void EnsureReflectionObject(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
+                DynamicallyAccessedMemberTypes.PublicFields |
+                DynamicallyAccessedMemberTypes.PublicNestedTypes |
+                DynamicallyAccessedMemberTypes.PublicProperties |
+                DynamicallyAccessedMemberTypes.PublicEvents |
+                DynamicallyAccessedMemberTypes.PublicMethods)]
+            Type objectType)
         {
             if (_reflectionObject == null)
             {
@@ -155,7 +166,9 @@ namespace Newtonsoft.Json.Converters
         /// <returns>
         /// 	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
         /// </returns>
-        public override bool CanConvert(Type objectType)
+        public override bool CanConvert(
+            // [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
+            Type objectType)
         {
             return objectType.AssignableToTypeName(EntityKeyMemberFullTypeName, false);
         }

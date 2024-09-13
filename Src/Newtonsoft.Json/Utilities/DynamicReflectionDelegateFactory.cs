@@ -26,6 +26,7 @@
 #if HAVE_REFLECTION_EMIT
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif
@@ -242,7 +243,9 @@ namespace Newtonsoft.Json.Utilities
             generator.Return();
         }
 
-        public override Func<T> CreateDefaultConstructor<T>(Type type)
+        public override Func<T> CreateDefaultConstructor<T>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+            Type type)
         {
             DynamicMethod dynamicMethod = CreateDynamicMethod("Create" + type.FullName, typeof(T), ReflectionUtils.EmptyTypes, type);
             dynamicMethod.InitLocals = true;
@@ -253,7 +256,11 @@ namespace Newtonsoft.Json.Utilities
             return (Func<T>)dynamicMethod.CreateDelegate(typeof(Func<T>));
         }
 
-        private void GenerateCreateDefaultConstructorIL(Type type, ILGenerator generator, Type delegateType)
+        private void GenerateCreateDefaultConstructorIL(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+            Type type,
+            ILGenerator generator,
+            Type delegateType)
         {
             if (type.IsValueType())
             {

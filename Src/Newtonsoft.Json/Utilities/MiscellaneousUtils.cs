@@ -44,6 +44,12 @@ namespace Newtonsoft.Json.Utilities
 
         internal const string AotWarning = "Newtonsoft.Json relies on dynamically creating types that may not be available with Ahead of Time compilation.";
 
+#if HAVE_APPCONTEXT
+        [FeatureSwitchDefinition("Newtonsoft.Json.SerializationIsSupported")]
+        [FeatureGuard(typeof(RequiresUnreferencedCodeAttribute))]
+        internal static bool SerializationIsSupported => AppContext.TryGetSwitch("Newtonsoft.Json.SerializationIsSupported", out bool isSupported) ? isSupported : true;
+#endif
+
         [Conditional("DEBUG")]
         public static void Assert([DoesNotReturnIf(false)] bool condition, string? message = null)
         {

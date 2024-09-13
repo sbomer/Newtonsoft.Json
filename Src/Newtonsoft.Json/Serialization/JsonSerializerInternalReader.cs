@@ -64,6 +64,7 @@ namespace Newtonsoft.Json.Serialization
         {
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public void Populate(JsonReader reader, object target)
         {
             ValidationUtils.ArgumentNotNull(target, nameof(target));
@@ -139,6 +140,7 @@ namespace Newtonsoft.Json.Serialization
             return Serializer._contractResolver.ResolveContract(type);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public object? Deserialize(JsonReader reader, Type? objectType, bool checkAdditionalContent)
         {
             if (reader == null)
@@ -292,6 +294,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object? CreateValueInternal(JsonReader reader, Type? objectType, JsonContract? contract, JsonProperty? member, JsonContainerContract? containerContract, JsonProperty? containerMember, object? existingValue)
         {
             if (contract != null && contract.ContractType == JsonContractType.Linq)
@@ -424,6 +427,7 @@ namespace Newtonsoft.Json.Serialization
             return converter;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object? CreateObject(JsonReader reader, Type? objectType, JsonContract? contract, JsonProperty? member, JsonContainerContract? containerContract, JsonProperty? containerMember, object? existingValue)
         {
             string? id;
@@ -598,6 +602,7 @@ namespace Newtonsoft.Json.Serialization
             throw JsonSerializationException.Create(reader, message);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private bool ReadMetadataPropertiesToken(JTokenReader reader, ref Type? objectType, ref JsonContract? contract, JsonProperty? member, JsonContainerContract? containerContract, JsonProperty? containerMember, object? existingValue, out object? newValue, out string? id)
         {
             id = null;
@@ -685,6 +690,7 @@ namespace Newtonsoft.Json.Serialization
             return false;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private bool ReadMetadataProperties(JsonReader reader, ref Type? objectType, ref JsonContract? contract, JsonProperty? member, JsonContainerContract? containerContract, JsonProperty? containerMember, object? existingValue, out object? newValue, out string? id)
         {
             id = null;
@@ -840,6 +846,7 @@ namespace Newtonsoft.Json.Serialization
             return arrayContract;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object? CreateList(JsonReader reader, Type? objectType, JsonContract? contract, JsonProperty? member, object? existingValue, string? id)
         {
             object? value;
@@ -938,6 +945,7 @@ namespace Newtonsoft.Json.Serialization
                 );
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object? EnsureType(JsonReader reader, object? value, CultureInfo culture, JsonContract? contract, Type? targetType)
         {
             if (targetType == null)
@@ -1009,6 +1017,7 @@ namespace Newtonsoft.Json.Serialization
             return value;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private bool SetPropertyValue(JsonProperty property, JsonConverter? propertyConverter, JsonContainerContract? containerContract, JsonProperty? containerProperty, JsonReader reader, object target)
         {
             bool skipSettingProperty = CalculatePropertyDetails(
@@ -1351,6 +1360,7 @@ namespace Newtonsoft.Json.Serialization
             contract.InvokeOnDeserialized(value, Serializer._context);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object PopulateDictionary(IDictionary dictionary, JsonReader reader, JsonDictionaryContract contract, JsonProperty? containerProperty, string? id)
         {
             object underlyingDictionary = dictionary is IWrappedDictionary wrappedDictionary ? wrappedDictionary.UnderlyingDictionary : dictionary;
@@ -1474,6 +1484,7 @@ namespace Newtonsoft.Json.Serialization
             return underlyingDictionary;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object PopulateMultidimensionalArray(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty? containerProperty, string? id)
         {
             int rank = contract.UnderlyingType.GetArrayRank();
@@ -1624,6 +1635,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty? containerProperty, string? id)
         {
 #pragma warning disable CS8600, CS8602, CS8603, CS8604
@@ -1726,6 +1738,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
 #if HAVE_BINARY_SERIALIZATION
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object CreateISerializable(JsonReader reader, JsonISerializableContract contract, JsonProperty? member, string? id)
         {
             Type objectType = contract.UnderlyingType;
@@ -1798,6 +1811,7 @@ namespace Newtonsoft.Json.Serialization
             return createdObject;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         internal object? CreateISerializableItem(JToken token, Type type, JsonISerializableContract contract, JsonProperty? member)
         {
             JsonContract? itemContract = GetContractSafe(type);
@@ -1822,6 +1836,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
 #if HAVE_DYNAMIC
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object CreateDynamic(JsonReader reader, JsonDynamicContract contract, JsonProperty? member, string? id)
         {
             IDynamicMetaObjectProvider newObject;
@@ -1948,6 +1963,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object CreateObjectUsingCreatorWithParameters(JsonReader reader, JsonObjectContract contract, JsonProperty? containerProperty, ObjectConstructor<object> creator, string? id)
         {
             ValidationUtils.ArgumentNotNull(creator, nameof(creator));
@@ -2182,6 +2198,7 @@ namespace Newtonsoft.Json.Serialization
             return createdObject;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object? DeserializeConvertable(JsonConverter converter, JsonReader reader, Type objectType, object? existingValue)
         {
             if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
@@ -2199,6 +2216,7 @@ namespace Newtonsoft.Json.Serialization
             return value;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private List<CreatorPropertyContext> ResolvePropertyAndCreatorValues(JsonObjectContract contract, JsonProperty? containerProperty, JsonReader reader, Type objectType)
         {
             List<CreatorPropertyContext> propertyValues = new List<CreatorPropertyContext>();
@@ -2298,6 +2316,7 @@ namespace Newtonsoft.Json.Serialization
             return propertyValues;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public object CreateNewObject(JsonReader reader, JsonObjectContract objectContract, JsonProperty? containerMember, JsonProperty? containerProperty, string? id, out bool createdFromNonDefaultCreator)
         {
             object? newObject = null;
@@ -2341,6 +2360,7 @@ namespace Newtonsoft.Json.Serialization
             return newObject;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object PopulateObject(object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty? member, string? id)
         {
             OnDeserializing(reader, contract, newObject);
@@ -2509,6 +2529,7 @@ namespace Newtonsoft.Json.Serialization
             return false;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void SetExtensionData(JsonObjectContract contract, JsonProperty? member, JsonReader reader, string memberName, object o)
         {
             if (contract.ExtensionDataSetter != null)
@@ -2530,6 +2551,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private object? ReadExtensionDataValue(JsonObjectContract contract, JsonProperty? member, JsonReader reader)
         {
             object? value;
@@ -2544,6 +2566,7 @@ namespace Newtonsoft.Json.Serialization
             return value;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void EndProcessProperty(object newObject, JsonReader reader, JsonObjectContract contract, int initialDepth, JsonProperty property, PropertyPresence presence, bool setDefaultValue)
         {
             if (presence == PropertyPresence.None || presence == PropertyPresence.Null)

@@ -30,6 +30,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -65,6 +67,7 @@ namespace Newtonsoft.Json.Schema
         /// <value>The contract resolver.</value>
         public IContractResolver ContractResolver
         {
+            [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 if (_contractResolver == null)
@@ -127,6 +130,7 @@ namespace Newtonsoft.Json.Schema
         /// </summary>
         /// <param name="type">The type to generate a <see cref="JsonSchema"/> from.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonSchema Generate(Type type)
         {
             return Generate(type, new JsonSchemaResolver(), false);
@@ -138,6 +142,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="type">The type to generate a <see cref="JsonSchema"/> from.</param>
         /// <param name="resolver">The <see cref="JsonSchemaResolver"/> used to resolve schema references.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonSchema Generate(Type type, JsonSchemaResolver resolver)
         {
             return Generate(type, resolver, false);
@@ -149,6 +154,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="type">The type to generate a <see cref="JsonSchema"/> from.</param>
         /// <param name="rootSchemaNullable">Specify whether the generated root <see cref="JsonSchema"/> will be nullable.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonSchema Generate(Type type, bool rootSchemaNullable)
         {
             return Generate(type, new JsonSchemaResolver(), rootSchemaNullable);
@@ -161,6 +167,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="resolver">The <see cref="JsonSchemaResolver"/> used to resolve schema references.</param>
         /// <param name="rootSchemaNullable">Specify whether the generated root <see cref="JsonSchema"/> will be nullable.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonSchema Generate(Type type, JsonSchemaResolver resolver, bool rootSchemaNullable)
         {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
@@ -171,6 +178,7 @@ namespace Newtonsoft.Json.Schema
             return GenerateInternal(type, (!rootSchemaNullable) ? Required.Always : Required.Default, false);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private string GetTitle(Type type)
         {
             JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
@@ -183,6 +191,7 @@ namespace Newtonsoft.Json.Schema
             return null;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private string GetDescription(Type type)
         {
             JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
@@ -200,6 +209,7 @@ namespace Newtonsoft.Json.Schema
 #endif
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private string GetTypeId(Type type, bool explicitOnly)
         {
             JsonContainerAttribute containerAttribute = JsonTypeReflector.GetCachedAttribute<JsonContainerAttribute>(type);
@@ -225,7 +235,12 @@ namespace Newtonsoft.Json.Schema
             }
         }
 
-        private JsonSchema GenerateInternal(Type type, Required valueRequired, bool required)
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        private JsonSchema GenerateInternal(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
+            Type type,
+            Required valueRequired,
+            bool required)
         {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
 
@@ -382,6 +397,7 @@ namespace Newtonsoft.Json.Schema
             return ((value & flag) == flag);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void GenerateObjectSchema(Type type, JsonObjectContract contract)
         {
             CurrentSchema.Properties = new Dictionary<string, JsonSchema>();

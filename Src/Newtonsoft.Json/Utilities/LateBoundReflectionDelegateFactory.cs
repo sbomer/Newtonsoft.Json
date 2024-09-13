@@ -26,6 +26,8 @@
 using System;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
+
 
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
@@ -65,7 +67,9 @@ namespace Newtonsoft.Json.Utilities
             return (o, a) => method.Invoke(o, a);
         }
 
-        public override Func<T> CreateDefaultConstructor<T>(Type type)
+        public override Func<T> CreateDefaultConstructor<T>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+            Type type)
         {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
 

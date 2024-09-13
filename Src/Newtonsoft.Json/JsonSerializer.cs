@@ -400,7 +400,9 @@ namespace Newtonsoft.Json
         /// </summary>
         public virtual IContractResolver ContractResolver
         {
+            [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get => _contractResolver;
+            [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             set => _contractResolver = value ?? DefaultContractResolver.Instance;
         }
 
@@ -552,6 +554,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSerializer"/> class.
         /// </summary>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonSerializer()
         {
             _referenceLoopHandling = JsonSerializerSettings.DefaultReferenceLoopHandling;
@@ -564,7 +567,7 @@ namespace Newtonsoft.Json
             _typeNameHandling = JsonSerializerSettings.DefaultTypeNameHandling;
             _metadataPropertyHandling = JsonSerializerSettings.DefaultMetadataPropertyHandling;
             _context = JsonSerializerSettings.DefaultContext;
-            _serializationBinder = DefaultSerializationBinder.Instance;
+            _serializationBinder = DefaultSerializationBinder.Statics.Instance;
 
             _culture = JsonSerializerSettings.DefaultCulture;
             _contractResolver = DefaultContractResolver.Instance;
@@ -580,6 +583,7 @@ namespace Newtonsoft.Json
         /// The <see cref="JsonSerializer"/> will not use default settings 
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static JsonSerializer Create()
         {
             return new JsonSerializer();
@@ -596,6 +600,7 @@ namespace Newtonsoft.Json
         /// The <see cref="JsonSerializer"/> will not use default settings 
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static JsonSerializer Create(JsonSerializerSettings? settings)
         {
             JsonSerializer serializer = Create();
@@ -618,6 +623,7 @@ namespace Newtonsoft.Json
         /// The <see cref="JsonSerializer"/> will use default settings 
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static JsonSerializer CreateDefault()
         {
             // copy static to local variable to avoid concurrency issues
@@ -637,6 +643,7 @@ namespace Newtonsoft.Json
         /// The <see cref="JsonSerializer"/> will use default settings 
         /// from <see cref="JsonConvert.DefaultSettings"/> as well as the specified <see cref="JsonSerializerSettings"/>.
         /// </returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static JsonSerializer CreateDefault(JsonSerializerSettings? settings)
         {
             JsonSerializer serializer = CreateDefault();
@@ -648,6 +655,7 @@ namespace Newtonsoft.Json
             return serializer;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static void ApplySerializerSettings(JsonSerializer serializer, JsonSerializerSettings settings)
         {
             if (!CollectionUtils.IsNullOrEmpty(settings.Converters))
@@ -788,6 +796,7 @@ namespace Newtonsoft.Json
         /// <param name="reader">The <see cref="TextReader"/> that contains the JSON structure to read values from.</param>
         /// <param name="target">The target object to populate values onto.</param>
         [DebuggerStepThrough]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public void Populate(TextReader reader, object target)
         {
             Populate(new JsonTextReader(reader), target);
@@ -799,11 +808,13 @@ namespace Newtonsoft.Json
         /// <param name="reader">The <see cref="JsonReader"/> that contains the JSON structure to read values from.</param>
         /// <param name="target">The target object to populate values onto.</param>
         [DebuggerStepThrough]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public void Populate(JsonReader reader, object target)
         {
             PopulateInternal(reader, target);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         internal virtual void PopulateInternal(JsonReader reader, object target)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
@@ -839,6 +850,7 @@ namespace Newtonsoft.Json
         /// <param name="reader">The <see cref="JsonReader"/> that contains the JSON structure to deserialize.</param>
         /// <returns>The <see cref="Object"/> being deserialized.</returns>
         [DebuggerStepThrough]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public object? Deserialize(JsonReader reader)
         {
             return Deserialize(reader, null);
@@ -852,6 +864,7 @@ namespace Newtonsoft.Json
         /// <param name="objectType">The <see cref="Type"/> of object being deserialized.</param>
         /// <returns>The instance of <paramref name="objectType"/> being deserialized.</returns>
         [DebuggerStepThrough]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public object? Deserialize(TextReader reader, Type objectType)
         {
             return Deserialize(new JsonTextReader(reader), objectType);
@@ -865,6 +878,7 @@ namespace Newtonsoft.Json
         /// <typeparam name="T">The type of the object to deserialize.</typeparam>
         /// <returns>The instance of <typeparamref name="T"/> being deserialized.</returns>
         [DebuggerStepThrough]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public T? Deserialize<T>(JsonReader reader)
         {
             return (T?)Deserialize(reader, typeof(T));
@@ -878,11 +892,13 @@ namespace Newtonsoft.Json
         /// <param name="objectType">The <see cref="Type"/> of object being deserialized.</param>
         /// <returns>The instance of <paramref name="objectType"/> being deserialized.</returns>
         [DebuggerStepThrough]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public object? Deserialize(JsonReader reader, Type? objectType)
         {
             return DeserializeInternal(reader, objectType);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         internal virtual object? DeserializeInternal(JsonReader reader, Type? objectType)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
@@ -1025,6 +1041,7 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="textWriter">The <see cref="TextWriter"/> used to write the JSON structure.</param>
         /// <param name="value">The <see cref="Object"/> to serialize.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public void Serialize(TextWriter textWriter, object? value)
         {
             Serialize(new JsonTextWriter(textWriter), value);
@@ -1041,6 +1058,7 @@ namespace Newtonsoft.Json
         /// This parameter is used when <see cref="JsonSerializer.TypeNameHandling"/> is <see cref="Json.TypeNameHandling.Auto"/> to write out the type name if the type of the value does not match.
         /// Specifying the type is optional.
         /// </param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public void Serialize(JsonWriter jsonWriter, object? value, Type? objectType)
         {
             SerializeInternal(jsonWriter, value, objectType);
@@ -1057,6 +1075,7 @@ namespace Newtonsoft.Json
         /// This parameter is used when <see cref="TypeNameHandling"/> is Auto to write out the type name if the type of the value does not match.
         /// Specifying the type is optional.
         /// </param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public void Serialize(TextWriter textWriter, object? value, Type objectType)
         {
             Serialize(new JsonTextWriter(textWriter), value, objectType);
@@ -1068,6 +1087,7 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="jsonWriter">The <see cref="JsonWriter"/> used to write the JSON structure.</param>
         /// <param name="value">The <see cref="Object"/> to serialize.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public void Serialize(JsonWriter jsonWriter, object? value)
         {
             SerializeInternal(jsonWriter, value, null);
@@ -1084,6 +1104,7 @@ namespace Newtonsoft.Json
             return traceReader;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         internal virtual void SerializeInternal(JsonWriter jsonWriter, object? value, Type? objectType)
         {
             ValidationUtils.ArgumentNotNull(jsonWriter, nameof(jsonWriter));

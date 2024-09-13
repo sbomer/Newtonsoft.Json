@@ -24,11 +24,13 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal static class CachedAttributeGetter<T> where T : Attribute
     {
         private static readonly ThreadSafeStore<object, T?> TypeAttributeCache = new ThreadSafeStore<object, T?>(JsonTypeReflector.GetAttribute<T>);

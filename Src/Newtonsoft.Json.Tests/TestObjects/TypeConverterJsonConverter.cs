@@ -25,6 +25,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -35,6 +36,7 @@ using Newtonsoft.Json.Utilities;
 namespace Newtonsoft.Json.Tests.TestObjects
 {
 #if !(NET35 || NET20 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class TypeConverterJsonConverter : JsonConverter
     {
         private TypeConverter GetConverter(Type type)

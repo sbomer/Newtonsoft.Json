@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Reflection;
 using System.Globalization;
@@ -41,18 +42,24 @@ namespace Newtonsoft.Json.Serialization
 #pragma warning restore 618
         ISerializationBinder
     {
-        internal static readonly DefaultSerializationBinder Instance = new DefaultSerializationBinder();
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        internal static class Statics
+        {
+            internal static readonly DefaultSerializationBinder Instance = new DefaultSerializationBinder();
+        }
 
         private readonly ThreadSafeStore<StructMultiKey<string?, string>, Type> _typeCache;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultSerializationBinder"/> class.
         /// </summary>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public DefaultSerializationBinder()
         {
             _typeCache = new ThreadSafeStore<StructMultiKey<string?, string>, Type>(GetTypeFromTypeNameKey);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private Type GetTypeFromTypeNameKey(StructMultiKey<string?, string> typeNameKey)
         {
             string? assemblyName = typeNameKey.Value1;
@@ -127,6 +134,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private Type? GetGenericTypeFromTypeName(string typeName, Assembly assembly)
         {
             Type? type = null;

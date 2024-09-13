@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 
@@ -33,6 +34,8 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Resolves member mappings for a type, camel casing property names.
     /// </summary>
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Adding here to silence warning about base type.
+    // Seems like none of the other members cause problems, so this is fine.
     public class CamelCasePropertyNamesContractResolver : DefaultContractResolver
     {
         private static readonly object TypeContractCacheLock = new object();
@@ -42,6 +45,7 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="CamelCasePropertyNamesContractResolver"/> class.
         /// </summary>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public CamelCasePropertyNamesContractResolver()
         {
             NamingStrategy = new CamelCaseNamingStrategy
@@ -56,6 +60,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="type">The type to resolve a contract for.</param>
         /// <returns>The contract for a given type.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override JsonContract ResolveContract(Type type)
         {
             if (type == null)

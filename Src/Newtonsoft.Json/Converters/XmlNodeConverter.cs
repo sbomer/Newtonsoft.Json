@@ -44,6 +44,7 @@ namespace Newtonsoft.Json.Converters
 {
     #region XmlNodeWrappers
 #if HAVE_XML_DOCUMENT
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XmlDocumentWrapper : XmlNodeWrapper, IXmlDocument
     {
         private readonly XmlDocument _document;
@@ -114,6 +115,7 @@ namespace Newtonsoft.Json.Converters
             return attribute;
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateAttribute(string qualifiedName, string? namespaceUri, string? value)
         {
             XmlNodeWrapper attribute = new XmlNodeWrapper(_document.CreateAttribute(qualifiedName, namespaceUri));
@@ -136,6 +138,7 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XmlElementWrapper : XmlNodeWrapper, IXmlElement
     {
         private readonly XmlElement _element;
@@ -161,6 +164,7 @@ namespace Newtonsoft.Json.Converters
         public bool IsEmpty => _element.IsEmpty;
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XmlDeclarationWrapper : XmlNodeWrapper, IXmlDeclaration
     {
         private readonly XmlDeclaration _declaration;
@@ -187,6 +191,7 @@ namespace Newtonsoft.Json.Converters
     }
 
 #if HAVE_XML_DOCUMENT_TYPE
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XmlDocumentTypeWrapper : XmlNodeWrapper, IXmlDocumentType
     {
         private readonly XmlDocumentType _documentType;
@@ -209,6 +214,7 @@ namespace Newtonsoft.Json.Converters
     }
 #endif
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XmlNodeWrapper : IXmlNode
     {
         private readonly XmlNode _node;
@@ -228,6 +234,7 @@ namespace Newtonsoft.Json.Converters
 
         public List<IXmlNode> ChildNodes
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 // childnodes is read multiple times
@@ -273,6 +280,7 @@ namespace Newtonsoft.Json.Converters
 
         public List<IXmlNode> Attributes
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // uses XmlNodeConverter member
             get
             {
                 // attributes is read multiple times
@@ -405,10 +413,12 @@ namespace Newtonsoft.Json.Converters
 
 #region XNodeWrappers
 #if HAVE_XLINQ
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XDeclarationWrapper : XObjectWrapper, IXmlDeclaration
     {
         internal XDeclaration Declaration { get; }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XDeclarationWrapper(XDeclaration declaration)
             : base(null)
         {
@@ -432,10 +442,12 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XDocumentTypeWrapper : XObjectWrapper, IXmlDocumentType
     {
         private readonly XDocumentType _documentType;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XDocumentTypeWrapper(XDocumentType documentType)
             : base(documentType)
         {
@@ -453,10 +465,12 @@ namespace Newtonsoft.Json.Converters
         public override string? LocalName => "DOCTYPE";
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // RUC interface impl cof IXmlNode
     internal class XDocumentWrapper : XContainerWrapper, IXmlDocument
     {
         private XDocument Document => (XDocument)WrappedNode!;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XDocumentWrapper(XDocument document)
             : base(document)
         {
@@ -464,6 +478,7 @@ namespace Newtonsoft.Json.Converters
 
         public override List<IXmlNode> ChildNodes
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 List<IXmlNode> childNodes = base.ChildNodes;
@@ -489,62 +504,74 @@ namespace Newtonsoft.Json.Converters
             }
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateComment(string? text)
         {
             return new XObjectWrapper(new XComment(text!));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateTextNode(string? text)
         {
             return new XObjectWrapper(new XText(text!));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateCDataSection(string? data)
         {
             return new XObjectWrapper(new XCData(data!));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateWhitespace(string? text)
         {
             return new XObjectWrapper(new XText(text!));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateSignificantWhitespace(string? text)
         {
             return new XObjectWrapper(new XText(text!));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateXmlDeclaration(string version, string? encoding, string? standalone)
         {
             return new XDeclarationWrapper(new XDeclaration(version, encoding, standalone));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateXmlDocumentType(string name, string? publicId, string? systemId, string? internalSubset)
         {
             return new XDocumentTypeWrapper(new XDocumentType(name, publicId, systemId, internalSubset));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateProcessingInstruction(string target, string data)
         {
             return new XProcessingInstructionWrapper(new XProcessingInstruction(target, data));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlElement CreateElement(string elementName)
         {
             return new XElementWrapper(new XElement(elementName));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlElement CreateElement(string qualifiedName, string namespaceUri)
         {
             string localName = MiscellaneousUtils.GetLocalName(qualifiedName);
             return new XElementWrapper(new XElement(XName.Get(localName, namespaceUri)));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateAttribute(string name, string value)
         {
             return new XAttributeWrapper(new XAttribute(name, value));
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public IXmlNode CreateAttribute(string qualifiedName, string namespaceUri, string value)
         {
             string localName = MiscellaneousUtils.GetLocalName(qualifiedName);
@@ -553,6 +580,7 @@ namespace Newtonsoft.Json.Converters
 
         public IXmlElement? DocumentElement
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 if (Document.Root == null)
@@ -578,10 +606,12 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XTextWrapper : XObjectWrapper
     {
         private XText Text => (XText)WrappedNode!;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XTextWrapper(XText text)
             : base(text)
         {
@@ -595,6 +625,7 @@ namespace Newtonsoft.Json.Converters
 
         public override IXmlNode? ParentNode
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 if (Text.Parent == null)
@@ -607,10 +638,12 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XCommentWrapper : XObjectWrapper
     {
         private XComment Text => (XComment)WrappedNode!;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XCommentWrapper(XComment text)
             : base(text)
         {
@@ -624,6 +657,7 @@ namespace Newtonsoft.Json.Converters
 
         public override IXmlNode? ParentNode
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 if (Text.Parent == null)
@@ -636,10 +670,12 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XProcessingInstructionWrapper : XObjectWrapper
     {
         private XProcessingInstruction ProcessingInstruction => (XProcessingInstruction)WrappedNode!;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XProcessingInstructionWrapper(XProcessingInstruction processingInstruction)
             : base(processingInstruction)
         {
@@ -654,12 +690,14 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Incompatible interface impl
     internal class XContainerWrapper : XObjectWrapper
     {
         private List<IXmlNode>? _childNodes;
 
         private XContainer Container => (XContainer)WrappedNode!;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XContainerWrapper(XContainer container)
             : base(container)
         {
@@ -667,6 +705,7 @@ namespace Newtonsoft.Json.Converters
 
         public override List<IXmlNode> ChildNodes
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // XmlNodeConverter
             get
             {
                 // childnodes is read multiple times
@@ -695,6 +734,7 @@ namespace Newtonsoft.Json.Converters
 
         public override IXmlNode? ParentNode
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 if (Container.Parent == null)
@@ -706,6 +746,7 @@ namespace Newtonsoft.Json.Converters
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         internal static IXmlNode WrapNode(XObject node)
         {
             if (node is XDocument document)
@@ -760,6 +801,7 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // use of XmlNodeConverter forces RUC in implementation of interface
     internal class XObjectWrapper : IXmlNode
     {
         private readonly XObject? _xmlObject;
@@ -775,9 +817,15 @@ namespace Newtonsoft.Json.Converters
 
         public virtual string? LocalName => null;
 
-        public virtual List<IXmlNode> ChildNodes => XmlNodeConverter.EmptyChildNodes;
+        public virtual List<IXmlNode> ChildNodes {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Uses XmlNodeConverter
+            get => XmlNodeConverter.EmptyChildNodes;
+        }
 
-        public virtual List<IXmlNode> Attributes => XmlNodeConverter.EmptyChildNodes;
+        public virtual List<IXmlNode> Attributes {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // Uses XmlNodeConverter
+            get => XmlNodeConverter.EmptyChildNodes;
+        }
 
         public virtual IXmlNode? ParentNode => null;
 
@@ -795,10 +843,12 @@ namespace Newtonsoft.Json.Converters
         public virtual string? NamespaceUri => null;
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XAttributeWrapper : XObjectWrapper
     {
         private XAttribute Attribute => (XAttribute)WrappedNode!;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XAttributeWrapper(XAttribute attribute)
             : base(attribute)
         {
@@ -816,6 +866,7 @@ namespace Newtonsoft.Json.Converters
 
         public override IXmlNode? ParentNode
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get
             {
                 if (Attribute.Parent == null)
@@ -828,12 +879,14 @@ namespace Newtonsoft.Json.Converters
         }
     }
 
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     internal class XElementWrapper : XContainerWrapper, IXmlElement
     {
         private List<IXmlNode>? _attributes;
 
         private XElement Element => (XElement)WrappedNode!;
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public XElementWrapper(XElement element)
             : base(element)
         {
@@ -848,6 +901,7 @@ namespace Newtonsoft.Json.Converters
 
         public override List<IXmlNode> Attributes
         {
+            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // uses XmlNodeConverter
             get
             {
                 // attributes is read multiple times
@@ -939,6 +993,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts XML to and from JSON.
     /// </summary>
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // overrides CanConvert with DAM
     public class XmlNodeConverter : JsonConverter
     {
         internal static readonly List<IXmlNode> EmptyChildNodes = new List<IXmlNode>();
@@ -986,6 +1041,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <param name="value">The value.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             if (value == null)
@@ -1478,6 +1534,7 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             switch (reader.TokenType)
@@ -2195,7 +2252,9 @@ namespace Newtonsoft.Json.Converters
         /// <returns>
         /// 	<c>true</c> if this instance can convert the specified value type; otherwise, <c>false</c>.
         /// </returns>
-        public override bool CanConvert(Type valueType)
+        public override bool CanConvert(
+            // [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
+            Type valueType)
         {
 #if HAVE_XLINQ
             if (valueType.AssignableToTypeName("System.Xml.Linq.XObject", false))

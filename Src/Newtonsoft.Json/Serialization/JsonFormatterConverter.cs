@@ -25,6 +25,7 @@
 
 #if HAVE_BINARY_SERIALIZATION
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Utilities;
@@ -32,6 +33,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // implements IFormatterConvertes members with RUC code.
     internal class JsonFormatterConverter : IFormatterConverter
     {
         private readonly JsonSerializerInternalReader _reader;
@@ -56,6 +58,7 @@ namespace Newtonsoft.Json.Serialization
             return (T)System.Convert.ChangeType(v.Value, typeof(T), CultureInfo.InvariantCulture)!;
         }
 
+        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public object Convert(object value, Type type)
         {
             ValidationUtils.ArgumentNotNull(value, nameof(value));

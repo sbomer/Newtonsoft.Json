@@ -32,6 +32,8 @@ using System.Reflection;
 using Newtonsoft.Json.Utilities;
 using System.Collections;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -60,6 +62,7 @@ namespace Newtonsoft.Json.Serialization
 
         private readonly Type? _genericCollectionDefinitionType;
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private Type? _genericWrapperType;
         private ObjectConstructor<object>? _genericWrapperCreator;
         private Func<object>? _genericTemporaryCollectionCreator;
@@ -113,6 +116,7 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonArrayContract"/> class.
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonArrayContract(Type underlyingType)
             : base(underlyingType)
         {
@@ -314,6 +318,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
 #if HAVE_FSHARP_TYPES
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private void StoreFSharpListCreatorIfNecessary(Type underlyingType)
         {
             if (!HasParameterizedCreatorInternal && underlyingType.Name == FSharpUtils.FSharpListTypeName)
