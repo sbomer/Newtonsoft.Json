@@ -36,30 +36,25 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// The default serialization binder used when resolving and loading classes from type names.
     /// </summary>
+    [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
     public class DefaultSerializationBinder :
 #pragma warning disable 618
         SerializationBinder,
 #pragma warning restore 618
         ISerializationBinder
     {
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
-        internal static class Statics
-        {
-            internal static readonly DefaultSerializationBinder Instance = new DefaultSerializationBinder();
-        }
+        internal static readonly DefaultSerializationBinder Instance = new DefaultSerializationBinder();
 
         private readonly ThreadSafeStore<StructMultiKey<string?, string>, Type> _typeCache;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultSerializationBinder"/> class.
         /// </summary>
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public DefaultSerializationBinder()
         {
             _typeCache = new ThreadSafeStore<StructMultiKey<string?, string>, Type>(GetTypeFromTypeNameKey);
         }
 
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private Type GetTypeFromTypeNameKey(StructMultiKey<string?, string> typeNameKey)
         {
             string? assemblyName = typeNameKey.Value1;
@@ -134,7 +129,6 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private Type? GetGenericTypeFromTypeName(string typeName, Assembly assembly)
         {
             Type? type = null;
