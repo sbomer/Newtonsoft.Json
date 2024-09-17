@@ -907,6 +907,11 @@ namespace Newtonsoft.Json.Utilities
         public static MemberInfo? GetMemberInfoFromType(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.NonPublicConstructors |
+                DynamicallyAccessedMemberTypes.NonPublicEvents |
+                DynamicallyAccessedMemberTypes.NonPublicFields |
+                DynamicallyAccessedMemberTypes.NonPublicMethods |
+                DynamicallyAccessedMemberTypes.NonPublicNestedTypes |
+                DynamicallyAccessedMemberTypes.NonPublicProperties |
                 DynamicallyAccessedMemberTypes.PublicConstructors |
                 DynamicallyAccessedMemberTypes.PublicEvents |
                 DynamicallyAccessedMemberTypes.PublicFields |
