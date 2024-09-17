@@ -321,7 +321,7 @@ namespace Newtonsoft.Json.Utilities
         public static bool ImplementsGenericDefinition(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type,
             Type genericInterfaceDefinition,
-            [NotNullWhen(true)]out Type? implementingType)
+            [NotNullWhen(true)] out Type? implementingType)
         {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
             ValidationUtils.ArgumentNotNull(genericInterfaceDefinition, nameof(genericInterfaceDefinition));

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2022 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -99,7 +99,7 @@ namespace Newtonsoft.Json.Utilities
 #if NET6_0_OR_GREATER
             // Number of bits scale is shifted by.
             const int ScaleShift = 16;
-        
+
             if (value == decimal.Zero)
             {
                 Span<int> bits = stackalloc int[4];

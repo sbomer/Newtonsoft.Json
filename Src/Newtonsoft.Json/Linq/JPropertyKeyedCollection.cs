@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -191,7 +191,7 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        public bool TryGetValue(string key, [NotNullWhen(true)]out JToken? value)
+        public bool TryGetValue(string key, [NotNullWhen(true)] out JToken? value)
         {
             if (_dictionary == null)
             {

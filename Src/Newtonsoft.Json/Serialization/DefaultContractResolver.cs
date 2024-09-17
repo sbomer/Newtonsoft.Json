@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -1130,7 +1130,7 @@ namespace Newtonsoft.Json.Serialization
 
             if (contract.IsInstantiable)
             {
-                ConstructorInfo? constructorInfo = contract.NonNullableUnderlyingType.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, new[] {typeof(SerializationInfo), typeof(StreamingContext)}, null);
+                ConstructorInfo? constructorInfo = contract.NonNullableUnderlyingType.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(SerializationInfo), typeof(StreamingContext) }, null);
                 if (constructorInfo != null)
                 {
                     ObjectConstructor<object> creator = JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructorInfo);
@@ -1539,7 +1539,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 property.PropertyName = ResolvePropertyName(mappedName);
             }
-            
+
             property.UnderlyingName = name;
 
             bool hasMemberAttribute = false;
@@ -1592,7 +1592,7 @@ namespace Newtonsoft.Json.Serialization
 
             bool hasJsonIgnoreAttribute =
                 JsonTypeReflector.GetAttribute<JsonIgnoreAttribute>(attributeProvider) != null
-                    // automatically ignore extension data dictionary property if it is public
+                // automatically ignore extension data dictionary property if it is public
                 || JsonTypeReflector.GetAttribute<JsonExtensionDataAttribute>(attributeProvider) != null
 #if HAVE_NON_SERIALIZED_ATTRIBUTE
                 || JsonTypeReflector.IsNonSerializable(attributeProvider)

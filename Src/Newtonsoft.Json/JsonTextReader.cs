@@ -164,7 +164,7 @@ namespace Newtonsoft.Json
         }
 
         private void ParseReadString(char quote, ReadType readType)
-        { 
+        {
             SetPostValueState(true);
 
             switch (readType)
@@ -1937,7 +1937,7 @@ namespace Newtonsoft.Json
                         throw JsonReaderException.Create(this, "Unexpected character while parsing constructor: {0}.".FormatWith(CultureInfo.InvariantCulture, currentChar));
                     }
                 }
-                
+
                 if (initialPosition == endPosition)
                 {
                     throw JsonReaderException.Create(this, "Empty constructor name.");

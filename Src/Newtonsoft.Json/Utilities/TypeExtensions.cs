@@ -568,7 +568,7 @@ namespace Newtonsoft.Json.Utilities
             return type.GetTypeInfo().IsValueType;
 #endif
         }
-        
+
         public static bool IsPrimitive(this Type type)
         {
 #if HAVE_FULL_REFLECTION
@@ -583,7 +583,7 @@ namespace Newtonsoft.Json.Utilities
             this Type type,
             string fullTypeName,
             bool searchInterfaces,
-            [NotNullWhen(true)]out Type? match)
+            [NotNullWhen(true)] out Type? match)
         {
             Type? current = type;
 

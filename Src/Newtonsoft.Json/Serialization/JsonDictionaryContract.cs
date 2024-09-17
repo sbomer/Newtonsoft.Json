@@ -208,7 +208,7 @@ namespace Newtonsoft.Json.Serialization
             }
 #endif
 
-            if (DictionaryKeyType != null && 
+            if (DictionaryKeyType != null &&
                 DictionaryValueType != null &&
                 ImmutableCollectionsUtils.TryBuildImmutableForDictionaryContract(
                     NonNullableUnderlyingType,

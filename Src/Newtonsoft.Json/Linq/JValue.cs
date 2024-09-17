@@ -270,47 +270,47 @@ namespace Newtonsoft.Json.Linq
             switch (valueType)
             {
                 case JTokenType.Integer:
-                {
+                    {
 #if HAVE_BIG_INTEGER
-                    if (objA is BigInteger integerA)
-                    {
-                        return CompareBigInteger(integerA, objB);
-                    }
-                    if (objB is BigInteger integerB)
-                    {
+                        if (objA is BigInteger integerA)
+                        {
+                            return CompareBigInteger(integerA, objB);
+                        }
+                        if (objB is BigInteger integerB)
+                        {
                             return -CompareBigInteger(integerB, objA);
                         }
 #endif
-                    if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
-                    {
-                        return Convert.ToDecimal(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
+                        if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
+                        {
+                            return Convert.ToDecimal(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
+                        }
+                        else if (objA is float || objB is float || objA is double || objB is double)
+                        {
+                            return CompareFloat(objA, objB);
+                        }
+                        else
+                        {
+                            return Convert.ToInt64(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToInt64(objB, CultureInfo.InvariantCulture));
+                        }
                     }
-                    else if (objA is float || objB is float || objA is double || objB is double)
-                    {
-                        return CompareFloat(objA, objB);
-                    }
-                    else
-                    {
-                        return Convert.ToInt64(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToInt64(objB, CultureInfo.InvariantCulture));
-                    }
-                }
                 case JTokenType.Float:
-                {
+                    {
 #if HAVE_BIG_INTEGER
-                    if (objA is BigInteger integerA)
-                    {
-                        return CompareBigInteger(integerA, objB);
-                    }
-                    if (objB is BigInteger integerB)
-                    {
-                        return -CompareBigInteger(integerB, objA);
-                    }
+                        if (objA is BigInteger integerA)
+                        {
+                            return CompareBigInteger(integerA, objB);
+                        }
+                        if (objB is BigInteger integerB)
+                        {
+                            return -CompareBigInteger(integerB, objA);
+                        }
 #endif
-                    if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
-                    {
-                        return Convert.ToDecimal(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
-                    }
-                    return CompareFloat(objA, objB);
+                        if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
+                        {
+                            return Convert.ToDecimal(objA, CultureInfo.InvariantCulture).CompareTo(Convert.ToDecimal(objB, CultureInfo.InvariantCulture));
+                        }
+                        return CompareFloat(objA, objB);
                     }
                 case JTokenType.Comment:
                 case JTokenType.String:
@@ -466,99 +466,99 @@ namespace Newtonsoft.Json.Linq
             else
 #endif
                 if (objA is ulong || objB is ulong || objA is decimal || objB is decimal)
+            {
+                if (objA == null || objB == null)
                 {
-                    if (objA == null || objB == null)
-                    {
-                        result = null;
-                        return true;
-                    }
-
-                    decimal d1 = Convert.ToDecimal(objA, CultureInfo.InvariantCulture);
-                    decimal d2 = Convert.ToDecimal(objB, CultureInfo.InvariantCulture);
-
-                    switch (operation)
-                    {
-                        case ExpressionType.Add:
-                        case ExpressionType.AddAssign:
-                            result = d1 + d2;
-                            return true;
-                        case ExpressionType.Subtract:
-                        case ExpressionType.SubtractAssign:
-                            result = d1 - d2;
-                            return true;
-                        case ExpressionType.Multiply:
-                        case ExpressionType.MultiplyAssign:
-                            result = d1 * d2;
-                            return true;
-                        case ExpressionType.Divide:
-                        case ExpressionType.DivideAssign:
-                            result = d1 / d2;
-                            return true;
-                    }
+                    result = null;
+                    return true;
                 }
-                else if (objA is float || objB is float || objA is double || objB is double)
+
+                decimal d1 = Convert.ToDecimal(objA, CultureInfo.InvariantCulture);
+                decimal d2 = Convert.ToDecimal(objB, CultureInfo.InvariantCulture);
+
+                switch (operation)
                 {
-                    if (objA == null || objB == null)
-                    {
-                        result = null;
+                    case ExpressionType.Add:
+                    case ExpressionType.AddAssign:
+                        result = d1 + d2;
                         return true;
-                    }
-
-                    double d1 = Convert.ToDouble(objA, CultureInfo.InvariantCulture);
-                    double d2 = Convert.ToDouble(objB, CultureInfo.InvariantCulture);
-
-                    switch (operation)
-                    {
-                        case ExpressionType.Add:
-                        case ExpressionType.AddAssign:
-                            result = d1 + d2;
-                            return true;
-                        case ExpressionType.Subtract:
-                        case ExpressionType.SubtractAssign:
-                            result = d1 - d2;
-                            return true;
-                        case ExpressionType.Multiply:
-                        case ExpressionType.MultiplyAssign:
-                            result = d1 * d2;
-                            return true;
-                        case ExpressionType.Divide:
-                        case ExpressionType.DivideAssign:
-                            result = d1 / d2;
-                            return true;
-                    }
+                    case ExpressionType.Subtract:
+                    case ExpressionType.SubtractAssign:
+                        result = d1 - d2;
+                        return true;
+                    case ExpressionType.Multiply:
+                    case ExpressionType.MultiplyAssign:
+                        result = d1 * d2;
+                        return true;
+                    case ExpressionType.Divide:
+                    case ExpressionType.DivideAssign:
+                        result = d1 / d2;
+                        return true;
                 }
-                else if (objA is int || objA is uint || objA is long || objA is short || objA is ushort || objA is sbyte || objA is byte ||
-                         objB is int || objB is uint || objB is long || objB is short || objB is ushort || objB is sbyte || objB is byte)
+            }
+            else if (objA is float || objB is float || objA is double || objB is double)
+            {
+                if (objA == null || objB == null)
                 {
-                    if (objA == null || objB == null)
-                    {
-                        result = null;
-                        return true;
-                    }
-
-                    long l1 = Convert.ToInt64(objA, CultureInfo.InvariantCulture);
-                    long l2 = Convert.ToInt64(objB, CultureInfo.InvariantCulture);
-
-                    switch (operation)
-                    {
-                        case ExpressionType.Add:
-                        case ExpressionType.AddAssign:
-                            result = l1 + l2;
-                            return true;
-                        case ExpressionType.Subtract:
-                        case ExpressionType.SubtractAssign:
-                            result = l1 - l2;
-                            return true;
-                        case ExpressionType.Multiply:
-                        case ExpressionType.MultiplyAssign:
-                            result = l1 * l2;
-                            return true;
-                        case ExpressionType.Divide:
-                        case ExpressionType.DivideAssign:
-                            result = l1 / l2;
-                            return true;
-                    }
+                    result = null;
+                    return true;
                 }
+
+                double d1 = Convert.ToDouble(objA, CultureInfo.InvariantCulture);
+                double d2 = Convert.ToDouble(objB, CultureInfo.InvariantCulture);
+
+                switch (operation)
+                {
+                    case ExpressionType.Add:
+                    case ExpressionType.AddAssign:
+                        result = d1 + d2;
+                        return true;
+                    case ExpressionType.Subtract:
+                    case ExpressionType.SubtractAssign:
+                        result = d1 - d2;
+                        return true;
+                    case ExpressionType.Multiply:
+                    case ExpressionType.MultiplyAssign:
+                        result = d1 * d2;
+                        return true;
+                    case ExpressionType.Divide:
+                    case ExpressionType.DivideAssign:
+                        result = d1 / d2;
+                        return true;
+                }
+            }
+            else if (objA is int || objA is uint || objA is long || objA is short || objA is ushort || objA is sbyte || objA is byte ||
+                     objB is int || objB is uint || objB is long || objB is short || objB is ushort || objB is sbyte || objB is byte)
+            {
+                if (objA == null || objB == null)
+                {
+                    result = null;
+                    return true;
+                }
+
+                long l1 = Convert.ToInt64(objA, CultureInfo.InvariantCulture);
+                long l2 = Convert.ToInt64(objB, CultureInfo.InvariantCulture);
+
+                switch (operation)
+                {
+                    case ExpressionType.Add:
+                    case ExpressionType.AddAssign:
+                        result = l1 + l2;
+                        return true;
+                    case ExpressionType.Subtract:
+                    case ExpressionType.SubtractAssign:
+                        result = l1 - l2;
+                        return true;
+                    case ExpressionType.Multiply:
+                    case ExpressionType.MultiplyAssign:
+                        result = l1 * l2;
+                        return true;
+                    case ExpressionType.Divide:
+                    case ExpressionType.DivideAssign:
+                        result = l1 / l2;
+                        return true;
+                }
+            }
 
             result = null;
             return false;
@@ -987,7 +987,7 @@ namespace Newtonsoft.Json.Linq
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private class JValueDynamicProxy : DynamicProxy<JValue>
         {
-            public override bool TryConvert(JValue instance, ConvertBinder binder, [NotNullWhen(true)]out object? result)
+            public override bool TryConvert(JValue instance, ConvertBinder binder, [NotNullWhen(true)] out object? result)
             {
                 if (binder.Type == typeof(JValue) || binder.Type == typeof(JToken))
                 {
@@ -1007,7 +1007,7 @@ namespace Newtonsoft.Json.Linq
                 return true;
             }
 
-            public override bool TryBinaryOperation(JValue instance, BinaryOperationBinder binder, object arg, [NotNullWhen(true)]out object? result)
+            public override bool TryBinaryOperation(JValue instance, BinaryOperationBinder binder, object arg, [NotNullWhen(true)] out object? result)
             {
                 object? compareValue = arg is JValue value ? value.Value : arg;
 

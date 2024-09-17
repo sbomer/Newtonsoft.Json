@@ -358,11 +358,11 @@ namespace Newtonsoft.Json.Utilities
             Action<T, object?> compiled = (Action<T, object?>)lambdaExpression.Compile();
             return compiled;
         }
-        
+
         private Expression EnsureCastExpression(Expression expression, Type targetType, bool allowWidening = false)
         {
             Type expressionType = expression.Type;
-            
+
             // check if a cast or conversion is required
             if (expressionType == targetType || (!expressionType.IsValueType() && targetType.IsAssignableFrom(expressionType)))
             {
@@ -386,10 +386,10 @@ namespace Newtonsoft.Json.Utilities
                             Expression.Call(toTargetTypeMethod, expression));
                     }
                 }
-                
+
                 return Expression.Condition(
                     Expression.Equal(expression, Expression.Constant(null, typeof(object))),
-                    Expression.Default(targetType), 
+                    Expression.Default(targetType),
                     convert);
             }
 

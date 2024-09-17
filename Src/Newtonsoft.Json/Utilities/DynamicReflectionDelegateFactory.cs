@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -57,7 +57,7 @@ namespace Newtonsoft.Json.Utilities
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
             GenerateCreateMethodCallIL(method, generator, 0);
-            
+
             return (ObjectConstructor<object>)dynamicMethod.CreateDelegate(typeof(ObjectConstructor<object>));
         }
 
@@ -168,13 +168,13 @@ namespace Newtonsoft.Json.Utilities
 
                     // argument has value, try to convert it to parameter type
                     generator.MarkLabel(skipSettingDefault);
-                    
+
                     if (parameterType.IsPrimitive())
                     {
                         // for primitive types we need to handle type widening (e.g. short -> int)
                         MethodInfo? toParameterTypeMethod = typeof(IConvertible)
                             .GetMethod("To" + parameterType.Name, new[] { typeof(IFormatProvider) });
-                        
+
                         if (toParameterTypeMethod != null)
                         {
                             Label skipConvertible = generator.DefineLabel();
@@ -207,7 +207,7 @@ namespace Newtonsoft.Json.Utilities
                     generator.Emit(OpCodes.Ldloc_S, localObject);
 
                     generator.UnboxIfNeeded(parameterType);
-                    
+
                     // parameter finished, we out!
                     generator.MarkLabel(finishedProcessingParameter);
                 }

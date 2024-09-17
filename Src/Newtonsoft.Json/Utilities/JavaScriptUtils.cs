@@ -329,7 +329,7 @@ namespace Newtonsoft.Json.Utilities
                 return w.ToString();
             }
         }
-        
+
         private static int FirstCharToEscape(string s, bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling)
         {
             for (int i = 0; i != s.Length; i++)
@@ -402,7 +402,7 @@ namespace Newtonsoft.Json.Utilities
             }
 
             return WriteCharAsync(task, writer, delimiter, cancellationToken);
-            
+
         }
 
         private static async Task WriteEscapedJavaScriptStringWithDelimitersAsync(Task task, TextWriter writer, string s, char delimiter,
@@ -569,7 +569,7 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        public static bool TryGetDateFromConstructorJson(JsonReader reader, out DateTime dateTime, [NotNullWhen(false)]out string? errorMessage)
+        public static bool TryGetDateFromConstructorJson(JsonReader reader, out DateTime dateTime, [NotNullWhen(false)] out string? errorMessage)
         {
             dateTime = default;
             errorMessage = null;

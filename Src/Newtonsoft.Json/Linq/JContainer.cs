@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -323,7 +323,7 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        internal bool IsMultiContent([NotNullWhen(true)]object? content)
+        internal bool IsMultiContent([NotNullWhen(true)] object? content)
         {
             return (content is IEnumerable && !(content is string) && !(content is JToken) && !(content is byte[]));
         }

@@ -784,7 +784,7 @@ namespace Newtonsoft.Json
         public override void WriteComment(string? text)
         {
             InternalWriteComment();
-            
+
             // if text contains "*/" then it must have been a line comment
             if (text != null && text.IndexOf("*/", StringComparison.Ordinal) > -1)
             {
