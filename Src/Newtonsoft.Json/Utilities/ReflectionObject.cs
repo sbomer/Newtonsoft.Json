@@ -75,12 +75,14 @@ namespace Newtonsoft.Json.Utilities
         }
 
         public static ReflectionObject Create(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
-                DynamicallyAccessedMemberTypes.PublicFields |
-                DynamicallyAccessedMemberTypes.PublicNestedTypes |
-                DynamicallyAccessedMemberTypes.PublicProperties |
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicConstructors |
+                DynamicallyAccessedMemberTypes.PublicConstructors |
                 DynamicallyAccessedMemberTypes.PublicEvents |
-                DynamicallyAccessedMemberTypes.PublicMethods)]
+                DynamicallyAccessedMemberTypes.PublicFields |
+                DynamicallyAccessedMemberTypes.PublicMethods |
+                DynamicallyAccessedMemberTypes.PublicNestedTypes |
+                DynamicallyAccessedMemberTypes.PublicProperties)]
             Type t,
             params string[] memberNames)
         {
@@ -88,12 +90,14 @@ namespace Newtonsoft.Json.Utilities
         }
 
         public static ReflectionObject Create(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors |
-                DynamicallyAccessedMemberTypes.PublicFields |
-                DynamicallyAccessedMemberTypes.PublicNestedTypes |
-                DynamicallyAccessedMemberTypes.PublicProperties |
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicConstructors |
+                DynamicallyAccessedMemberTypes.PublicConstructors |
                 DynamicallyAccessedMemberTypes.PublicEvents |
-                DynamicallyAccessedMemberTypes.PublicMethods)]
+                DynamicallyAccessedMemberTypes.PublicFields |
+                DynamicallyAccessedMemberTypes.PublicMethods |
+                DynamicallyAccessedMemberTypes.PublicNestedTypes |
+                DynamicallyAccessedMemberTypes.PublicProperties)]
             Type t,
             MethodBase? creator,
             params string[] memberNames)
