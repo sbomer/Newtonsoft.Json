@@ -105,6 +105,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private JsonSerializerProxy GetInternalSerializer()
         {
             if (InternalSerializer == null)
@@ -1004,6 +1005,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private bool ShouldWriteDynamicProperty(object? memberValue)
         {
             if (Serializer._nullValueHandling == NullValueHandling.Ignore && memberValue == null)

@@ -39,6 +39,7 @@ using System.Text;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Newtonsoft.Json.Utilities
 {
@@ -60,6 +61,7 @@ namespace Newtonsoft.Json.Utilities
             private static MethodCall<object?, object?>? _setMemberCall;
             private static bool _init;
 
+            [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             private static void Init()
             {
                 if (!_init)
@@ -97,6 +99,7 @@ namespace Newtonsoft.Json.Utilities
                 return a;
             }
 
+            [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             private static void CreateMemberCalls()
             {
                 Type csharpArgumentInfoType = Type.GetType(CSharpArgumentInfoTypeName, true)!;
@@ -113,6 +116,7 @@ namespace Newtonsoft.Json.Utilities
             }
 #endif
 
+            [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             public static CallSiteBinder GetMember(string name, Type context)
             {
 #if !HAVE_REFLECTION_BINDER
@@ -126,6 +130,7 @@ namespace Newtonsoft.Json.Utilities
 #endif
             }
 
+            [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             public static CallSiteBinder SetMember(string name, Type context)
             {
 #if !HAVE_REFLECTION_BINDER

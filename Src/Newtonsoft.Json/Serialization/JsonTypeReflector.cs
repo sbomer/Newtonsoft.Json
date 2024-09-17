@@ -61,11 +61,20 @@ namespace Newtonsoft.Json.Serialization
 
         public const string ConcurrentDictionaryTypeName = "System.Collections.Concurrent.ConcurrentDictionary`2";
 
-        private static readonly ThreadSafeStore<Type, Func<object[]?, object>> CreatorCache = 
-            new ThreadSafeStore<Type, Func<object[]?, object>>(GetCreator);
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        private static class CreatorCache
+        {
+            internal static readonly ThreadSafeStore<Type, Func<object[]?, object>> Instance = 
+                new ThreadSafeStore<Type, Func<object[]?, object>>(GetCreator);
+        }
 
 #if !(NET20 || DOTNET)
-        private static readonly ThreadSafeStore<Type, Type?> AssociatedMetadataTypesCache = new ThreadSafeStore<Type, Type?>(GetAssociateMetadataTypeFromAttribute);
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        private static class AssociatedMetadataTypesCache
+        {
+            internal static readonly ThreadSafeStore<Type, Type?> Instance = new ThreadSafeStore<Type, Type?>(GetAssociateMetadataTypeFromAttribute);
+        }
+
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
 #endif
 
@@ -193,7 +202,7 @@ namespace Newtonsoft.Json.Serialization
 
             if (converterAttribute != null)
             {
-                Func<object[]?, object> creator = CreatorCache.Get(converterAttribute.ConverterType);
+                Func<object[]?, object> creator = CreatorCache.Instance.Get(converterAttribute.ConverterType);
                 if (creator != null)
                 {
                     return (JsonConverter)creator(converterAttribute.ConverterParameters);
@@ -209,18 +218,21 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="converterType">The <see cref="JsonConverter"/> type to create.</param>
         /// <param name="args">Optional arguments to pass to an initializing constructor of the JsonConverter.
         /// If <c>null</c>, the default constructor is used.</param>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static JsonConverter CreateJsonConverterInstance(Type converterType, object[]? args)
         {
-            Func<object[]?, object> converterCreator = CreatorCache.Get(converterType);
+            Func<object[]?, object> converterCreator = CreatorCache.Instance.Get(converterType);
             return (JsonConverter)converterCreator(args);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static NamingStrategy CreateNamingStrategyInstance(Type namingStrategyType, object[]? args)
         {
-            Func<object[]?, object> converterCreator = CreatorCache.Get(namingStrategyType);
+            Func<object[]?, object> converterCreator = CreatorCache.Instance.Get(namingStrategyType);
             return (NamingStrategy)converterCreator(args);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static NamingStrategy? GetContainerNamingStrategy(JsonContainerAttribute containerAttribute)
         {
             if (containerAttribute.NamingStrategyInstance == null)
@@ -287,11 +299,13 @@ namespace Newtonsoft.Json.Serialization
         }
 
 #if !(NET20 || DOTNET)
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static Type? GetAssociatedMetadataType(Type type)
         {
-            return AssociatedMetadataTypesCache.Get(type);
+            return AssociatedMetadataTypesCache.Instance.Get(type);
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static Type? GetAssociateMetadataTypeFromAttribute(Type type)
         {
             Attribute[] customAttributes = ReflectionUtils.GetAttributes(type, null, true);
@@ -319,6 +333,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static T? GetAttribute<T>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type) where T : Attribute
         {
             T? attribute;

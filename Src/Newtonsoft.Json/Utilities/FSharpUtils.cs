@@ -176,6 +176,7 @@ namespace Newtonsoft.Json.Utilities
             return createFunction;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public ObjectConstructor<object> CreateSeq(Type t)
         {
             MethodInfo seqType = _ofSeq.MakeGenericMethod(t);

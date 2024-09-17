@@ -237,6 +237,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonSerializerProxy(JsonSerializerInternalReader serializerReader)
         {
             ValidationUtils.ArgumentNotNull(serializerReader, nameof(serializerReader));
@@ -245,6 +246,7 @@ namespace Newtonsoft.Json.Serialization
             _serializer = serializerReader.Serializer;
         }
 
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public JsonSerializerProxy(JsonSerializerInternalWriter serializerWriter)
         {
             ValidationUtils.ArgumentNotNull(serializerWriter, nameof(serializerWriter));
