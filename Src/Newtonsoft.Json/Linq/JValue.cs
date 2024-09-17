@@ -971,7 +971,6 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// The <see cref="DynamicMetaObject"/> to bind this object.
         /// </returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected override DynamicMetaObject GetMetaObject(Expression parameter)
         {
 #if HAVE_APPCONTEXT
@@ -988,7 +987,6 @@ namespace Newtonsoft.Json.Linq
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private class JValueDynamicProxy : DynamicProxy<JValue>
         {
-            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             public override bool TryConvert(JValue instance, ConvertBinder binder, [NotNullWhen(true)]out object? result)
             {
                 if (binder.Type == typeof(JValue) || binder.Type == typeof(JToken))
@@ -1198,7 +1196,6 @@ namespace Newtonsoft.Json.Linq
             return (DateTime)this;
         }
 
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         object IConvertible.ToType(Type conversionType, IFormatProvider? provider)
         {
 #if HAVE_APPCONTEXT

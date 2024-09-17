@@ -208,7 +208,6 @@ namespace Newtonsoft.Json.Utilities
         /// Helper method for generating a MetaObject which calls a
         /// specific method on Dynamic that returns a result
         /// </summary>
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private DynamicMetaObject CallMethodWithResult(string methodName, DynamicMetaObjectBinder binder, IEnumerable<Expression> args, Fallback fallback, Fallback? fallbackInvoke = null)
         {
             //
@@ -220,7 +219,6 @@ namespace Newtonsoft.Json.Utilities
             return BuildCallMethodWithResult(methodName, binder, args, fallbackResult, fallbackInvoke);
         }
 
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private DynamicMetaObject BuildCallMethodWithResult(string methodName, DynamicMetaObjectBinder binder, IEnumerable<Expression> args, DynamicMetaObject fallbackResult, Fallback? fallbackInvoke)
         {
             //
@@ -279,7 +277,6 @@ namespace Newtonsoft.Json.Utilities
         /// specific method on Dynamic, but uses one of the arguments for
         /// the result.
         /// </summary>
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private DynamicMetaObject CallMethodReturnLast(string methodName, DynamicMetaObjectBinder binder, IEnumerable<Expression> args, Fallback fallback)
         {
             //
@@ -326,7 +323,6 @@ namespace Newtonsoft.Json.Utilities
         /// specific method on Dynamic, but uses one of the arguments for
         /// the result.
         /// </summary>
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private DynamicMetaObject CallMethodNoResult(string methodName, DynamicMetaObjectBinder binder, Expression[] args, Fallback fallback)
         {
             //

@@ -28,7 +28,6 @@ using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
 
-
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif

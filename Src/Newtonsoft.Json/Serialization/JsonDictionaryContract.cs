@@ -31,7 +31,6 @@ using Newtonsoft.Json.Utilities;
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
-
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif

@@ -25,7 +25,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

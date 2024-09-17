@@ -836,7 +836,6 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// The <see cref="DynamicMetaObject"/> to bind this object.
         /// </returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         protected override DynamicMetaObject GetMetaObject(Expression parameter)
         {
 #if HAVE_APPCONTEXT
