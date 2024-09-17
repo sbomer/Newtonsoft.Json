@@ -256,68 +256,29 @@ namespace Newtonsoft.Json.Utilities
 #endif
         }
 
-        internal readonly struct StructTypeTypeKey : IEquatable<StructTypeTypeKey>
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        static class CastConverters
         {
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            public readonly Type Value1;
-
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            public readonly Type Value2;
-
-            public StructTypeTypeKey(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                Type v1,
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                Type v2)
-            {
-                Value1 = v1;
-                Value2 = v2;
-            }
-
-            public override int GetHashCode()
-            {
-                return (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0);
-            }
-
-            public override bool Equals(object? obj)
-            {
-                if (!(obj is StructTypeTypeKey key))
-                {
-                    return false;
-                }
-
-                return Equals(key);
-            }
-
-            public bool Equals(StructTypeTypeKey other)
-            {
-                return (Equals(Value1, other.Value1) && Equals(Value2, other.Value2));
-            }
+            public static readonly ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?> Instance =
+                new ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?>(CreateCastConverter);
         }
 
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
-        private static class Statics
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        private static Func<object?, object?>? CreateCastConverter(StructMultiKey<Type, Type> t)
         {
-            public static readonly ThreadSafeStore<StructTypeTypeKey, Func<object?, object?>?> CastConverters =
-                new ThreadSafeStore<StructTypeTypeKey, Func<object?, object?>?>(CreateCastConverter);
+            Type initialType = t.Value1;
+            Type targetType = t.Value2;
+            MethodInfo? castMethodInfo = targetType.GetMethod("op_Implicit", new[] { initialType })
+                ?? targetType.GetMethod("op_Explicit", new[] { initialType });
 
-            // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
-            private static Func<object?, object?>? CreateCastConverter(StructTypeTypeKey t)
+            if (castMethodInfo == null)
             {
-                Type initialType = t.Value1;
-                Type targetType = t.Value2;
-                MethodInfo? castMethodInfo = targetType.GetMethod("op_Implicit", new[] { initialType })
-                    ?? targetType.GetMethod("op_Explicit", new[] { initialType });
-
-                if (castMethodInfo == null)
-                {
-                    return null;
-                }
-
-                MethodCall<object?, object?> call = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(castMethodInfo);
-
-                return o => call(null, o);
+                return null;
             }
+
+            MethodCall<object?, object?> call = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(castMethodInfo);
+
+            return o => call(null, o);
         }
 
 #if HAVE_BIG_INTEGER
@@ -668,7 +629,7 @@ namespace Newtonsoft.Json.Utilities
                     return value;
                 }
 
-                Func<object?, object?>? castConverter = Statics.CastConverters.Get(new StructTypeTypeKey(valueType, targetType));
+                Func<object?, object?>? castConverter = CastConverters.Instance.Get(new StructMultiKey<Type, Type>(valueType, targetType));
                 if (castConverter != null)
                 {
                     return castConverter(value);
