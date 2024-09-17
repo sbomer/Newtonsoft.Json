@@ -403,6 +403,7 @@ namespace Newtonsoft.Json
             [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
             get => _contractResolver;
             [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             set => _contractResolver = value ?? DefaultContractResolver.Instance;
         }
 
@@ -555,6 +556,7 @@ namespace Newtonsoft.Json
         /// Initializes a new instance of the <see cref="JsonSerializer"/> class.
         /// </summary>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonSerializer()
         {
             _referenceLoopHandling = JsonSerializerSettings.DefaultReferenceLoopHandling;
@@ -584,6 +586,7 @@ namespace Newtonsoft.Json
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JsonSerializer Create()
         {
             return new JsonSerializer();
@@ -601,6 +604,7 @@ namespace Newtonsoft.Json
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JsonSerializer Create(JsonSerializerSettings? settings)
         {
             JsonSerializer serializer = Create();
@@ -624,6 +628,7 @@ namespace Newtonsoft.Json
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JsonSerializer CreateDefault()
         {
             // copy static to local variable to avoid concurrency issues
@@ -644,6 +649,7 @@ namespace Newtonsoft.Json
         /// from <see cref="JsonConvert.DefaultSettings"/> as well as the specified <see cref="JsonSerializerSettings"/>.
         /// </returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JsonSerializer CreateDefault(JsonSerializerSettings? settings)
         {
             JsonSerializer serializer = CreateDefault();
@@ -656,6 +662,7 @@ namespace Newtonsoft.Json
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static void ApplySerializerSettings(JsonSerializer serializer, JsonSerializerSettings settings)
         {
             if (!CollectionUtils.IsNullOrEmpty(settings.Converters))
@@ -797,6 +804,7 @@ namespace Newtonsoft.Json
         /// <param name="target">The target object to populate values onto.</param>
         [DebuggerStepThrough]
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void Populate(TextReader reader, object target)
         {
             Populate(new JsonTextReader(reader), target);
@@ -809,12 +817,14 @@ namespace Newtonsoft.Json
         /// <param name="target">The target object to populate values onto.</param>
         [DebuggerStepThrough]
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void Populate(JsonReader reader, object target)
         {
             PopulateInternal(reader, target);
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal virtual void PopulateInternal(JsonReader reader, object target)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
@@ -899,6 +909,7 @@ namespace Newtonsoft.Json
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal virtual object? DeserializeInternal(JsonReader reader, Type? objectType)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));

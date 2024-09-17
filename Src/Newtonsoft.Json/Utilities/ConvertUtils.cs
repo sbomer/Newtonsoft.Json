@@ -198,6 +198,7 @@ namespace Newtonsoft.Json.Utilities
             return GetTypeCode(t, out _);
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static PrimitiveTypeCode GetTypeCode(Type t, out bool isEnum)
         {
             if (TypeCodeMap.TryGetValue(t, out PrimitiveTypeCode typeCode))

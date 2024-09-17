@@ -486,6 +486,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="o">The object that will be used to create <see cref="JObject"/>.</param>
         /// <returns>A <see cref="JObject"/> with the values of the specified object.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public new static JObject FromObject(object o)
         {
             return FromObject(o, JsonSerializer.CreateDefault());

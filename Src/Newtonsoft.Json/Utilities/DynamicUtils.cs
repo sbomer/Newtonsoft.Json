@@ -62,6 +62,7 @@ namespace Newtonsoft.Json.Utilities
             private static bool _init;
 
             [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             private static void Init()
             {
                 if (!_init)
@@ -82,6 +83,7 @@ namespace Newtonsoft.Json.Utilities
                 }
             }
 
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             private static object CreateSharpArgumentInfoArray(params int[] values)
             {
                 Type csharpArgumentInfoType = Type.GetType(CSharpArgumentInfoTypeName, true)!;
@@ -100,6 +102,7 @@ namespace Newtonsoft.Json.Utilities
             }
 
             [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             private static void CreateMemberCalls()
             {
                 Type csharpArgumentInfoType = Type.GetType(CSharpArgumentInfoTypeName, true)!;
@@ -117,6 +120,7 @@ namespace Newtonsoft.Json.Utilities
 #endif
 
             [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             public static CallSiteBinder GetMember(string name, Type context)
             {
 #if !HAVE_REFLECTION_BINDER
@@ -131,6 +135,7 @@ namespace Newtonsoft.Json.Utilities
             }
 
             [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             public static CallSiteBinder SetMember(string name, Type context)
             {
 #if !HAVE_REFLECTION_BINDER

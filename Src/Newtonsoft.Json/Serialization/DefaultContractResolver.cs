@@ -60,6 +60,7 @@ namespace Newtonsoft.Json.Serialization
     /// Used by <see cref="JsonSerializer"/> to resolve a <see cref="JsonContract"/> for a given <see cref="System.Type"/>.
     /// </summary>
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public class DefaultContractResolver : IContractResolver
     {
         private static readonly IContractResolver _instance = new DefaultContractResolver();

@@ -117,6 +117,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonArrayContract(Type underlyingType)
             : base(underlyingType)
         {
@@ -273,6 +274,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal IWrappedCollection CreateWrapper(object list)
         {
             if (_genericWrapperCreator == null)
@@ -301,6 +303,7 @@ namespace Newtonsoft.Json.Serialization
             return (IWrappedCollection)_genericWrapperCreator(list);
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal IList CreateTemporaryCollection()
         {
             if (_genericTemporaryCollectionCreator == null)
@@ -319,6 +322,7 @@ namespace Newtonsoft.Json.Serialization
 
 #if HAVE_FSHARP_TYPES
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private void StoreFSharpListCreatorIfNecessary(Type underlyingType)
         {
             if (!HasParameterizedCreatorInternal && underlyingType.Name == FSharpUtils.FSharpListTypeName)

@@ -118,6 +118,7 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static ConstructorInfo? ResolveEnumerableCollectionConstructor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             Type collectionType,
@@ -128,6 +129,7 @@ namespace Newtonsoft.Json.Utilities
             return ResolveEnumerableCollectionConstructor(collectionType, collectionItemType, genericConstructorArgument);
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static ConstructorInfo? ResolveEnumerableCollectionConstructor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             Type collectionType,
@@ -360,6 +362,7 @@ namespace Newtonsoft.Json.Utilities
             return currentList;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static Array ToMultidimensionalArray(IList values, Type type, int rank)
         {
             IList<int> dimensions = GetDimensions(values, rank);

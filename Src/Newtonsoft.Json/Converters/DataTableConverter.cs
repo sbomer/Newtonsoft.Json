@@ -39,6 +39,7 @@ namespace Newtonsoft.Json.Converters
     /// Converts a <see cref="DataTable"/> to and from JSON.
     /// </summary>
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public class DataTableConverter : JsonConverter
     {
         /// <summary>
@@ -135,7 +136,6 @@ namespace Newtonsoft.Json.Converters
             return dt;
         }
 
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static void CreateRow(JsonReader reader, DataTable dt, JsonSerializer serializer)
         {
             DataRow dr = dt.NewRow();

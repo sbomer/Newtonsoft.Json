@@ -177,6 +177,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public ObjectConstructor<object> CreateSeq(Type t)
         {
             MethodInfo seqType = _ofSeq.MakeGenericMethod(t);
@@ -195,6 +196,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public ObjectConstructor<object> BuildMapCreator<TKey, TValue>()
         {
             Type genericMapType = _mapType.MakeGenericType(typeof(TKey), typeof(TValue));

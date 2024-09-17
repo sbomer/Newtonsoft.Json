@@ -1921,6 +1921,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="o">The object that will be used to create <see cref="JToken"/>.</param>
         /// <returns>A <see cref="JToken"/> with the value of the specified object.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JToken FromObject(object o)
         {
             return FromObjectInternal(o, JsonSerializer.CreateDefault());
@@ -1955,6 +1956,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="objectType">The object type that the token will be deserialized to.</param>
         /// <returns>The new object created from the JSON value.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public object? ToObject(Type objectType)
         {
             if (JsonConvert.DefaultSettings == null)
@@ -2437,9 +2439,9 @@ namespace Newtonsoft.Json.Linq
                 throw new NotSupportedException(MiscellaneousUtils.DynamicNotSupportedMessage);
             }
 #endif
-#pragma warning disable IL2026
+#pragma warning disable IL2026, IL3050
             return new DynamicProxyMetaObject<JToken>(parameter, this, new DynamicProxy<JToken>());
-#pragma warning restore IL2026
+#pragma warning restore IL2026, IL3050
         }
 
         /// <summary>

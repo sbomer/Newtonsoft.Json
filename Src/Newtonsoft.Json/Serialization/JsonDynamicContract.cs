@@ -56,6 +56,7 @@ namespace Newtonsoft.Json.Serialization
             new ThreadSafeStore<string, CallSite<Func<CallSite, object, object?, object>>>(CreateCallSiteSetter);
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static CallSite<Func<CallSite, object, object>> CreateCallSiteGetter(string name)
         {
             GetMemberBinder getMemberBinder = (GetMemberBinder)DynamicUtils.BinderWrapper.GetMember(name, typeof(DynamicUtils));
@@ -64,6 +65,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static CallSite<Func<CallSite, object, object?, object>> CreateCallSiteSetter(string name)
         {
             SetMemberBinder binder = (SetMemberBinder)DynamicUtils.BinderWrapper.SetMember(name, typeof(DynamicUtils));

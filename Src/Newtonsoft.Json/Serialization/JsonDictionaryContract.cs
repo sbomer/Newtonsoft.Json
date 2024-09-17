@@ -113,6 +113,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonDictionaryContract(Type underlyingType)
             : base(underlyingType)
         {
@@ -222,6 +223,7 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal IWrappedDictionary CreateWrapper(object dictionary)
         {
             if (_genericWrapperCreator == null)
@@ -235,6 +237,7 @@ namespace Newtonsoft.Json.Serialization
             return (IWrappedDictionary)_genericWrapperCreator(dictionary);
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal IDictionary CreateTemporaryDictionary()
         {
             if (_genericTemporaryDictionaryCreator == null)

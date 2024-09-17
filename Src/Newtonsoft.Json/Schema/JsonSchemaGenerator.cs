@@ -68,6 +68,7 @@ namespace Newtonsoft.Json.Schema
         public IContractResolver ContractResolver
         {
             [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             get
             {
                 if (_contractResolver == null)
@@ -131,6 +132,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="type">The type to generate a <see cref="JsonSchema"/> from.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonSchema Generate(Type type)
         {
             return Generate(type, new JsonSchemaResolver(), false);
@@ -143,6 +145,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="resolver">The <see cref="JsonSchemaResolver"/> used to resolve schema references.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonSchema Generate(Type type, JsonSchemaResolver resolver)
         {
             return Generate(type, resolver, false);
@@ -155,6 +158,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="rootSchemaNullable">Specify whether the generated root <see cref="JsonSchema"/> will be nullable.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonSchema Generate(Type type, bool rootSchemaNullable)
         {
             return Generate(type, new JsonSchemaResolver(), rootSchemaNullable);
@@ -168,6 +172,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="rootSchemaNullable">Specify whether the generated root <see cref="JsonSchema"/> will be nullable.</param>
         /// <returns>A <see cref="JsonSchema"/> generated from the specified type.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonSchema Generate(Type type, JsonSchemaResolver resolver, bool rootSchemaNullable)
         {
             ValidationUtils.ArgumentNotNull(type, nameof(type));
@@ -236,6 +241,7 @@ namespace Newtonsoft.Json.Schema
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private JsonSchema GenerateInternal(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
             Type type,
@@ -398,6 +404,7 @@ namespace Newtonsoft.Json.Schema
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private void GenerateObjectSchema(Type type, JsonObjectContract contract)
         {
             CurrentSchema.Properties = new Dictionary<string, JsonSchema>();

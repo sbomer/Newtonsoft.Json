@@ -62,6 +62,7 @@ namespace Newtonsoft.Json.Utilities
 #if HAVE_DYNAMIC
         [FeatureSwitchDefinition("Newtonsoft.Json.DynamicIsSupported")]
         [FeatureGuard(typeof(RequiresUnreferencedCodeAttribute))]
+        [FeatureGuard(typeof(RequiresDynamicCodeAttribute))]
         internal static bool DynamicIsSupported => AppContext.TryGetSwitch("Newtonsoft.Json.DynamicIsSupported", out bool isSupported) ? isSupported : true;
 
         internal const string DynamicNotSupportedMessage = "Newtonsoft.Json support for dynamic is not compatible with trimming and has been disabled. Newtonsoft.Json.DynamicIsSupported is set to false.";

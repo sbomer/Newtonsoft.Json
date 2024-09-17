@@ -36,6 +36,7 @@ namespace Newtonsoft.Json.Converters
     /// Converts a <see cref="DataSet"/> to and from JSON.
     /// </summary>
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public class DataSetConverter : JsonConverter
     {
         /// <summary>

@@ -34,6 +34,7 @@ using Newtonsoft.Json.Linq;
 namespace Newtonsoft.Json.Serialization
 {
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     internal class JsonFormatterConverter : IFormatterConverter
     {
         private readonly JsonSerializerInternalReader _reader;

@@ -190,6 +190,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="o">The object that will be used to create <see cref="JArray"/>.</param>
         /// <returns>A <see cref="JArray"/> with the values of the specified object.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public new static JArray FromObject(object o)
         {
             return FromObject(o, JsonSerializer.CreateDefault());
