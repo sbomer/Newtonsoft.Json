@@ -913,6 +913,7 @@ namespace Newtonsoft.Json.Utilities
                 DynamicallyAccessedMemberTypes.PublicMethods |
                 DynamicallyAccessedMemberTypes.PublicNestedTypes |
                 DynamicallyAccessedMemberTypes.PublicProperties)]
+            Type targetType,
             MemberInfo memberInfo)
         {
             const BindingFlags bindingAttr = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
