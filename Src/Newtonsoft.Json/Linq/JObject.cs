@@ -839,9 +839,9 @@ namespace Newtonsoft.Json.Linq
         protected override DynamicMetaObject GetMetaObject(Expression parameter)
         {
 #if HAVE_APPCONTEXT
-            if (!MiscellaneousUtils.SerializationIsSupported)
+            if (!MiscellaneousUtils.DynamicIsSupported)
             {
-                throw new PlatformNotSupportedException("DynamicObject is not supported on this platform.");
+                throw new NotSupportedException(MiscellaneousUtils.DynamicNotSupportedMessage);
             }
 #endif
 #pragma warning disable IL2026

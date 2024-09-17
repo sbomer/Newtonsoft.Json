@@ -76,7 +76,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
 #if HAVE_TYPE_DESCRIPTOR
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // TypeDescriptor
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         public static bool CanTypeDescriptorConvertString(Type type, out TypeConverter typeConverter)
         {
             typeConverter = TypeDescriptor.GetConverter(type);
@@ -89,7 +89,7 @@ namespace Newtonsoft.Json.Serialization
                 if (!string.Equals(converterType.FullName, "System.ComponentModel.ComponentConverter", StringComparison.Ordinal)
                     && !string.Equals(converterType.FullName, "System.ComponentModel.ReferenceConverter", StringComparison.Ordinal)
                     && !string.Equals(converterType.FullName, "System.Windows.Forms.Design.DataSourceConverter", StringComparison.Ordinal)
-                    && converterType != typeof(TypeConverter))
+                    && converterType != typeof(TypeConverter)) 
                 {
                     return typeConverter.CanConvertTo(typeof(string));
                 }

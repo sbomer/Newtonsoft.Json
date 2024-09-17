@@ -412,7 +412,7 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // TypeDescriptor
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         private static ConvertResult TryConvertInternal(object? initialValue, CultureInfo culture, Type targetType, out object? value)
         {
             if (initialValue == null)

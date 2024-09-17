@@ -351,7 +351,7 @@ namespace Newtonsoft.Json.Schema
 #if HAVE_APPCONTEXT
             if (!MiscellaneousUtils.SerializationIsSupported)
             {
-                throw new NotSupportedException("Serialization is not supported.");
+                throw new NotSupportedException(MiscellaneousUtils.SerializationNotSupportedMessage);
             }
 #endif
             StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);

@@ -960,9 +960,9 @@ namespace Newtonsoft.Json.Linq
         PropertyDescriptorCollection ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
         {
 #if HAVE_APPCONTEXT
-            if (!MiscellaneousUtils.SerializationIsSupported)
+            if (!MiscellaneousUtils.ComponentModelIsSupported)
             {
-                throw new NotSupportedException("Serialization is not supported.");
+                throw new NotSupportedException(MiscellaneousUtils.ComponentModelNotSupportedMessage);
             }
 #endif
             ICustomTypeDescriptor? d = First as ICustomTypeDescriptor;

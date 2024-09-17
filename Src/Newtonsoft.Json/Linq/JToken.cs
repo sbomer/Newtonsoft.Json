@@ -434,7 +434,7 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_APPCONTEXT
             if (!MiscellaneousUtils.SerializationIsSupported)
             {
-                throw new NotSupportedException("Serialization is not supported.");
+                throw new NotSupportedException(MiscellaneousUtils.SerializationNotSupportedMessage);
             }
 #endif
 #pragma warning disable IL2026
@@ -2432,9 +2432,9 @@ namespace Newtonsoft.Json.Linq
         protected virtual DynamicMetaObject GetMetaObject(Expression parameter)
         {
 #if HAVE_APPCONTEXT
-            if (!MiscellaneousUtils.SerializationIsSupported)
+            if (!MiscellaneousUtils.DynamicIsSupported)
             {
-                throw new NotSupportedException("Dynamic operations are not supported when serialization is disabled.");
+                throw new NotSupportedException(MiscellaneousUtils.DynamicNotSupportedMessage);
             }
 #endif
 #pragma warning disable IL2026
@@ -2449,7 +2449,6 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// The <see cref="DynamicMetaObject"/> to bind this object.
         /// </returns>
-        // [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         DynamicMetaObject IDynamicMetaObjectProvider.GetMetaObject(Expression parameter)
         {
             return GetMetaObject(parameter);
