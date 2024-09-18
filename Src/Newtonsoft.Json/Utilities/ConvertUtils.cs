@@ -171,23 +171,23 @@ namespace Newtonsoft.Json.Utilities
         private static readonly TypeInformation[] PrimitiveTypeCodes =
         {
             // need all of these. lookup against the index with TypeCode value
-            new TypeInformation(typeof(object), PrimitiveTypeCode.Empty),
-            new TypeInformation(typeof(object), PrimitiveTypeCode.Object),
-            new TypeInformation(typeof(object), PrimitiveTypeCode.DBNull),
-            new TypeInformation(typeof(bool), PrimitiveTypeCode.Boolean),
-            new TypeInformation(typeof(char), PrimitiveTypeCode.Char),
-            new TypeInformation(typeof(sbyte), PrimitiveTypeCode.SByte),
-            new TypeInformation(typeof(byte), PrimitiveTypeCode.Byte),
-            new TypeInformation(typeof(short), PrimitiveTypeCode.Int16),
-            new TypeInformation(typeof(ushort), PrimitiveTypeCode.UInt16),
-            new TypeInformation(typeof(int), PrimitiveTypeCode.Int32),
-            new TypeInformation(typeof(uint), PrimitiveTypeCode.UInt32),
-            new TypeInformation(typeof(long), PrimitiveTypeCode.Int64),
-            new TypeInformation(typeof(ulong), PrimitiveTypeCode.UInt64),
-            new TypeInformation(typeof(float), PrimitiveTypeCode.Single),
-            new TypeInformation(typeof(double), PrimitiveTypeCode.Double),
-            new TypeInformation(typeof(decimal), PrimitiveTypeCode.Decimal),
-            new TypeInformation(typeof(DateTime), PrimitiveTypeCode.DateTime),
+            new TypeInformation(typeof(object), PrimitiveTypeCode.Empty), 
+            new TypeInformation(typeof(object), PrimitiveTypeCode.Object), 
+            new TypeInformation(typeof(object), PrimitiveTypeCode.DBNull), 
+            new TypeInformation(typeof(bool), PrimitiveTypeCode.Boolean), 
+            new TypeInformation(typeof(char), PrimitiveTypeCode.Char), 
+            new TypeInformation(typeof(sbyte), PrimitiveTypeCode.SByte), 
+            new TypeInformation(typeof(byte), PrimitiveTypeCode.Byte), 
+            new TypeInformation(typeof(short), PrimitiveTypeCode.Int16), 
+            new TypeInformation(typeof(ushort), PrimitiveTypeCode.UInt16), 
+            new TypeInformation(typeof(int), PrimitiveTypeCode.Int32), 
+            new TypeInformation(typeof(uint), PrimitiveTypeCode.UInt32), 
+            new TypeInformation(typeof(long), PrimitiveTypeCode.Int64), 
+            new TypeInformation(typeof(ulong), PrimitiveTypeCode.UInt64), 
+            new TypeInformation(typeof(float), PrimitiveTypeCode.Single), 
+            new TypeInformation(typeof(double), PrimitiveTypeCode.Double), 
+            new TypeInformation(typeof(decimal), PrimitiveTypeCode.Decimal), 
+            new TypeInformation(typeof(DateTime), PrimitiveTypeCode.DateTime), 
             new TypeInformation(typeof(object), PrimitiveTypeCode.Empty), // no 17 in TypeCode for some reason
             new TypeInformation(typeof(string), PrimitiveTypeCode.String)
         };
@@ -368,7 +368,7 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        #region TryConvert
+#region TryConvert
         internal enum ConvertResult
         {
             Success = 0,
@@ -587,9 +587,9 @@ namespace Newtonsoft.Json.Utilities
             value = null;
             return ConvertResult.NoValidConversion;
         }
-        #endregion
+#endregion
 
-        #region ConvertOrCast
+#region ConvertOrCast
         /// <summary>
         /// Converts the value to the specified type. If the value is unable to be converted, the
         /// value is checked whether it assignable to the specified type.
@@ -622,7 +622,7 @@ namespace Newtonsoft.Json.Utilities
 
             return EnsureTypeAssignable(initialValue, ReflectionUtils.GetObjectType(initialValue)!, targetType);
         }
-        #endregion
+#endregion
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
 
@@ -654,7 +654,7 @@ namespace Newtonsoft.Json.Utilities
             throw new ArgumentException("Could not cast or convert from {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, initialType?.ToString() ?? "{null}", targetType));
         }
 
-        public static bool VersionTryParse(string input, [NotNullWhen(true)] out Version? result)
+        public static bool VersionTryParse(string input, [NotNullWhen(true)]out Version? result)
         {
 #if HAVE_VERSION_TRY_PARSE
             return Version.TryParse(input, out result);

@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -65,7 +65,7 @@ namespace Newtonsoft.Json.Serialization
         [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static class CreatorCache
         {
-            internal static readonly ThreadSafeStore<Type, Func<object[]?, object>> Instance =
+            internal static readonly ThreadSafeStore<Type, Func<object[]?, object>> Instance = 
                 new ThreadSafeStore<Type, Func<object[]?, object>>(GetCreator);
         }
 
@@ -101,7 +101,7 @@ namespace Newtonsoft.Json.Serialization
                 if (!string.Equals(converterType.FullName, "System.ComponentModel.ComponentConverter", StringComparison.Ordinal)
                     && !string.Equals(converterType.FullName, "System.ComponentModel.ReferenceConverter", StringComparison.Ordinal)
                     && !string.Equals(converterType.FullName, "System.Windows.Forms.Design.DataSourceConverter", StringComparison.Ordinal)
-                    && converterType != typeof(TypeConverter))
+                    && converterType != typeof(TypeConverter)) 
                 {
                     return typeConverter.CanConvertTo(typeof(string));
                 }

@@ -33,7 +33,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
 {
     internal class JPath
     {
-        private static readonly char[] FloatCharacters = new[] { '.', 'E', 'e' };
+        private static readonly char[] FloatCharacters = new[] {'.', 'E', 'e'};
 
         private readonly string _expression;
         public List<PathFilter> Filters { get; }

@@ -110,7 +110,7 @@ namespace Newtonsoft.Json.Serialization
                             // current property is hidden by the existing so don't add it
                             return;
                         }
-
+                        
                         if (_type.ImplementInterface(existingProperty.DeclaringType) && _type.ImplementInterface(property.DeclaringType))
                         {
                             // current property was already defined on another interface
@@ -146,7 +146,7 @@ namespace Newtonsoft.Json.Serialization
             return property;
         }
 
-        private bool TryGetProperty(string key, [NotNullWhen(true)] out JsonProperty? item)
+        private bool TryGetProperty(string key, [NotNullWhen(true)]out JsonProperty? item)
         {
             if (Dictionary == null)
             {
