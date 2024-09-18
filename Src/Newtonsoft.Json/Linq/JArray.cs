@@ -203,6 +203,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used to read the object.</param>
         /// <returns>A <see cref="JArray"/> with the values of the specified object.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public new static JArray FromObject(object o, JsonSerializer jsonSerializer)
         {
             JToken token = FromObjectInternal(o, jsonSerializer);
@@ -221,6 +222,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
         {
             writer.WriteStartArray();

@@ -96,6 +96,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal JsonContainerContract(Type underlyingType)
             : base(underlyingType)
         {

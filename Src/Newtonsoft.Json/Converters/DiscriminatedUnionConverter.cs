@@ -45,6 +45,7 @@ namespace Newtonsoft.Json.Converters
     /// Converts a F# discriminated union type to and from JSON.
     /// </summary>
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public class DiscriminatedUnionConverter : JsonConverter
     {
         #region UnionDefinition

@@ -47,6 +47,7 @@ namespace Newtonsoft.Json.Utilities
 #if HAVE_APPCONTEXT
         [FeatureSwitchDefinition("Newtonsoft.Json.SerializationIsSupported")]
         [FeatureGuard(typeof(RequiresUnreferencedCodeAttribute))]
+        [FeatureGuard(typeof(RequiresDynamicCodeAttribute))]
         internal static bool SerializationIsSupported => AppContext.TryGetSwitch("Newtonsoft.Json.SerializationIsSupported", out bool isSupported) ? isSupported : true;
 
         internal const string SerializationNotSupportedMessage = "Newtonsoft.Json serialization is not compatible with trimming and has been disabled. Newtonsoft.Json.SerializationIsSupported is set to false.";

@@ -861,6 +861,7 @@ namespace Newtonsoft.Json
         /// <returns>The <see cref="Object"/> being deserialized.</returns>
         [DebuggerStepThrough]
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public object? Deserialize(JsonReader reader)
         {
             return Deserialize(reader, null);
@@ -875,6 +876,7 @@ namespace Newtonsoft.Json
         /// <returns>The instance of <paramref name="objectType"/> being deserialized.</returns>
         [DebuggerStepThrough]
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public object? Deserialize(TextReader reader, Type objectType)
         {
             return Deserialize(new JsonTextReader(reader), objectType);
@@ -889,6 +891,7 @@ namespace Newtonsoft.Json
         /// <returns>The instance of <typeparamref name="T"/> being deserialized.</returns>
         [DebuggerStepThrough]
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public T? Deserialize<T>(JsonReader reader)
         {
             return (T?)Deserialize(reader, typeof(T));
@@ -903,6 +906,7 @@ namespace Newtonsoft.Json
         /// <returns>The instance of <paramref name="objectType"/> being deserialized.</returns>
         [DebuggerStepThrough]
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public object? Deserialize(JsonReader reader, Type? objectType)
         {
             return DeserializeInternal(reader, objectType);
@@ -1053,6 +1057,7 @@ namespace Newtonsoft.Json
         /// <param name="textWriter">The <see cref="TextWriter"/> used to write the JSON structure.</param>
         /// <param name="value">The <see cref="Object"/> to serialize.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void Serialize(TextWriter textWriter, object? value)
         {
             Serialize(new JsonTextWriter(textWriter), value);
@@ -1070,6 +1075,7 @@ namespace Newtonsoft.Json
         /// Specifying the type is optional.
         /// </param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void Serialize(JsonWriter jsonWriter, object? value, Type? objectType)
         {
             SerializeInternal(jsonWriter, value, objectType);
@@ -1087,6 +1093,7 @@ namespace Newtonsoft.Json
         /// Specifying the type is optional.
         /// </param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void Serialize(TextWriter textWriter, object? value, Type objectType)
         {
             Serialize(new JsonTextWriter(textWriter), value, objectType);
@@ -1099,6 +1106,7 @@ namespace Newtonsoft.Json
         /// <param name="jsonWriter">The <see cref="JsonWriter"/> used to write the JSON structure.</param>
         /// <param name="value">The <see cref="Object"/> to serialize.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void Serialize(JsonWriter jsonWriter, object? value)
         {
             SerializeInternal(jsonWriter, value, null);
@@ -1116,6 +1124,7 @@ namespace Newtonsoft.Json
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal virtual void SerializeInternal(JsonWriter jsonWriter, object? value, Type? objectType)
         {
             ValidationUtils.ArgumentNotNull(jsonWriter, nameof(jsonWriter));

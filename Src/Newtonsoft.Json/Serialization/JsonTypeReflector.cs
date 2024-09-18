@@ -62,6 +62,7 @@ namespace Newtonsoft.Json.Serialization
         public const string ConcurrentDictionaryTypeName = "System.Collections.Concurrent.ConcurrentDictionary`2";
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static class CreatorCache
         {
             internal static readonly ThreadSafeStore<Type, Func<object[]?, object>> Instance =
@@ -70,6 +71,7 @@ namespace Newtonsoft.Json.Serialization
 
 #if !(NET20 || DOTNET)
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static class AssociatedMetadataTypesCache
         {
             internal static readonly ThreadSafeStore<Type, Type?> Instance = new ThreadSafeStore<Type, Type?>(GetAssociateMetadataTypeFromAttribute);
@@ -79,6 +81,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static T? GetCachedAttribute<T>(object attributeProvider) where T : Attribute
         {
             return CachedAttributeGetter<T>.GetAttribute(attributeProvider);
@@ -111,6 +114,7 @@ namespace Newtonsoft.Json.Serialization
 
 #if HAVE_DATA_CONTRACTS
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static DataContractAttribute? GetDataContractAttribute(Type type)
         {
             // DataContractAttribute does not have inheritance
@@ -131,6 +135,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static DataMemberAttribute? GetDataMemberAttribute(MemberInfo memberInfo)
         {
             // DataMemberAttribute does not have inheritance
@@ -168,6 +173,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static MemberSerialization GetObjectMemberSerialization(Type objectType, bool ignoreSerializableAttribute)
         {
             JsonObjectAttribute? objectAttribute = GetCachedAttribute<JsonObjectAttribute>(objectType);
@@ -196,6 +202,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JsonConverter? GetJsonConverter(object attributeProvider)
         {
             JsonConverterAttribute? converterAttribute = GetCachedAttribute<JsonConverterAttribute>(attributeProvider);
@@ -219,6 +226,7 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="args">Optional arguments to pass to an initializing constructor of the JsonConverter.
         /// If <c>null</c>, the default constructor is used.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JsonConverter CreateJsonConverterInstance(Type converterType, object[]? args)
         {
             Func<object[]?, object> converterCreator = CreatorCache.Instance.Get(converterType);
@@ -226,6 +234,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static NamingStrategy CreateNamingStrategyInstance(Type namingStrategyType, object[]? args)
         {
             Func<object[]?, object> converterCreator = CreatorCache.Instance.Get(namingStrategyType);
@@ -233,6 +242,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static NamingStrategy? GetContainerNamingStrategy(JsonContainerAttribute containerAttribute)
         {
             if (containerAttribute.NamingStrategyInstance == null)
@@ -248,6 +258,7 @@ namespace Newtonsoft.Json.Serialization
             return containerAttribute.NamingStrategyInstance;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static Func<object[]?, object> GetCreator(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
             Type type)
@@ -300,12 +311,14 @@ namespace Newtonsoft.Json.Serialization
 
 #if !(NET20 || DOTNET)
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static Type? GetAssociatedMetadataType(Type type)
         {
             return AssociatedMetadataTypesCache.Instance.Get(type);
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static Type? GetAssociateMetadataTypeFromAttribute(Type type)
         {
             Attribute[] customAttributes = ReflectionUtils.GetAttributes(type, null, true);
@@ -334,6 +347,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static T? GetAttribute<T>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type) where T : Attribute
         {
             T? attribute;
@@ -369,6 +383,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static T? GetAttribute<T>(MemberInfo memberInfo) where T : Attribute
         {
             T? attribute;
@@ -451,6 +466,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static T? GetAttribute<T>(object provider) where T : Attribute
         {
             if (provider is Type type)

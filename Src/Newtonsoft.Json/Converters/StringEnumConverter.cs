@@ -46,6 +46,7 @@ namespace Newtonsoft.Json.Converters
     /// Converts an <see cref="Enum"/> to and from its name string value.
     /// </summary>
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public class StringEnumConverter : JsonConverter
     {
         /// <summary>

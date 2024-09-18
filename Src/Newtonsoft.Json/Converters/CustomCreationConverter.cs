@@ -35,6 +35,7 @@ namespace Newtonsoft.Json.Converters
     /// </summary>
     /// <typeparam name="T">The object type to convert.</typeparam>
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public abstract class CustomCreationConverter<T> : JsonConverter
     {
         /// <summary>

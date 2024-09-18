@@ -79,6 +79,7 @@ namespace Newtonsoft.Json.Serialization
 
         internal ObjectConstructor<object>? ParameterizedCreator
         {
+            [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
             get
             {
                 if (_parameterizedCreator == null && _parameterizedConstructor != null)

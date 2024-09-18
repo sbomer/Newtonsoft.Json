@@ -47,6 +47,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override Task WriteToAsync(JsonWriter writer, CancellationToken cancellationToken, params JsonConverter[] converters)
         {
             if (converters != null && converters.Length > 0 && _value != null)

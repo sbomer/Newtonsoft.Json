@@ -47,6 +47,7 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public JsonISerializableContract(Type underlyingType)
             : base(underlyingType)
         {

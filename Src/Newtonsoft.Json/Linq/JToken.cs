@@ -416,7 +416,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // TODO: see if this can be removed.
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public abstract void WriteTo(JsonWriter writer, params JsonConverter[] converters);
 
         /// <summary>
@@ -449,6 +450,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="converters">A collection of <see cref="JsonConverter"/>s which will be used when writing the token.</param>
         /// <returns>The JSON for this token using the given formatting and converters.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public string ToString(Formatting formatting, params JsonConverter[] converters)
         {
             using (StringWriter sw = new StringWriter(CultureInfo.InvariantCulture))
@@ -1900,6 +1902,7 @@ namespace Newtonsoft.Json.Linq
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal static JToken FromObjectInternal(object o, JsonSerializer jsonSerializer)
         {
             ValidationUtils.ArgumentNotNull(o, nameof(o));
@@ -1934,6 +1937,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used when reading the object.</param>
         /// <returns>A <see cref="JToken"/> with the value of the specified object.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static JToken FromObject(object o, JsonSerializer jsonSerializer)
         {
             return FromObjectInternal(o, jsonSerializer);
@@ -1945,6 +1949,7 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The object type that the token will be deserialized to.</typeparam>
         /// <returns>The new object created from the JSON value.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public T? ToObject<T>()
         {
             return (T?)ToObject(typeof(T));
@@ -2081,6 +2086,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used when creating the object.</param>
         /// <returns>The new object created from the JSON value.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public T? ToObject<T>(JsonSerializer jsonSerializer)
         {
             return (T?)ToObject(typeof(T), jsonSerializer);
@@ -2093,6 +2099,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used when creating the object.</param>
         /// <returns>The new object created from the JSON value.</returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public object? ToObject(Type? objectType, JsonSerializer jsonSerializer)
         {
             ValidationUtils.ArgumentNotNull(jsonSerializer, nameof(jsonSerializer));

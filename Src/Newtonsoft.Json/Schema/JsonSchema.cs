@@ -320,6 +320,7 @@ namespace Newtonsoft.Json.Schema
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void WriteTo(JsonWriter writer)
         {
             WriteTo(writer, new JsonSchemaResolver());
@@ -331,6 +332,7 @@ namespace Newtonsoft.Json.Schema
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="resolver">The resolver used.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public void WriteTo(JsonWriter writer, JsonSchemaResolver resolver)
         {
             ValidationUtils.ArgumentNotNull(writer, nameof(writer));

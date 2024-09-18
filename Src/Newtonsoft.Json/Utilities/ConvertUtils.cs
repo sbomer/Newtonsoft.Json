@@ -198,7 +198,7 @@ namespace Newtonsoft.Json.Utilities
             return GetTypeCode(t, out _);
         }
 
-        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
+        [UnconditionalSuppressMessage("AotAnalysis", "IL3050", Justification = "Nullable<T> instantiated over primitive types are kept by TypeCodeMap")]
         public static PrimitiveTypeCode GetTypeCode(Type t, out bool isEnum)
         {
             if (TypeCodeMap.TryGetValue(t, out PrimitiveTypeCode typeCode))
@@ -258,6 +258,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         static class CastConverters
         {
             public static readonly ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?> Instance =
@@ -265,6 +266,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static Func<object?, object?>? CreateCastConverter(StructMultiKey<Type, Type> t)
         {
             Type initialType = t.Value1;
@@ -376,6 +378,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static object Convert(object initialValue, CultureInfo culture, Type targetType)
         {
             switch (TryConvertInternal(initialValue, culture, targetType, out object? value))
@@ -394,6 +397,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static bool TryConvert(object? initialValue, CultureInfo culture, Type targetType, out object? value)
         {
             try
@@ -414,6 +418,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static ConvertResult TryConvertInternal(object? initialValue, CultureInfo culture, Type targetType, out object? value)
         {
             if (initialValue == null)
@@ -597,6 +602,7 @@ namespace Newtonsoft.Json.Utilities
         /// is returned if assignable to the target type.
         /// </returns>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static object? ConvertOrCast(object? initialValue, CultureInfo culture, Type targetType)
         {
             if (targetType == typeof(object))
@@ -618,6 +624,7 @@ namespace Newtonsoft.Json.Utilities
         }
         #endregion
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
 
         private static object? EnsureTypeAssignable(object? value, Type initialType, Type targetType)
         {

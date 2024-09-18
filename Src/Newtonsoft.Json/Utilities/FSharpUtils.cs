@@ -58,6 +58,7 @@ namespace Newtonsoft.Json.Utilities
     internal class FSharpUtils
     {
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private FSharpUtils(Assembly fsharpCoreAssembly)
         {
             FSharpCoreAssembly = fsharpCoreAssembly;
@@ -122,6 +123,7 @@ namespace Newtonsoft.Json.Utilities
         public const string FSharpMapTypeName = "FSharpMap`2";
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static void EnsureInitialized(Assembly fsharpCoreAssembly)
         {
             if (_instance == null)
@@ -157,6 +159,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private static MethodCall<object?, object> CreateFSharpFuncCall(Type type, string methodName)
         {
             MethodInfo innerMethodInfo = GetMethodWithNonPublicFallback(type, methodName, BindingFlags.Public | BindingFlags.Static);
@@ -186,6 +189,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public ObjectConstructor<object> CreateMap(Type keyType, Type valueType)
         {
             MethodInfo creatorDefinition = typeof(FSharpUtils).GetMethod("BuildMapCreator")!;

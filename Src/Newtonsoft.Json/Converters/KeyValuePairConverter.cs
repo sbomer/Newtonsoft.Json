@@ -36,6 +36,7 @@ namespace Newtonsoft.Json.Converters
     /// Converts a <see cref="KeyValuePair{TKey,TValue}"/> to and from JSON.
     /// </summary>
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public class KeyValuePairConverter : JsonConverter
     {
         private const string KeyName = "Key";

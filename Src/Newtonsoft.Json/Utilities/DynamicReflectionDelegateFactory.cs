@@ -51,6 +51,7 @@ namespace Newtonsoft.Json.Utilities
             return dynamicMethod;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override ObjectConstructor<object> CreateParameterizedConstructor(MethodBase method)
         {
             DynamicMethod dynamicMethod = CreateDynamicMethod(method.ToString()!, typeof(object), new[] { typeof(object[]) }, method.DeclaringType!);
@@ -61,6 +62,7 @@ namespace Newtonsoft.Json.Utilities
             return (ObjectConstructor<object>)dynamicMethod.CreateDelegate(typeof(ObjectConstructor<object>));
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override MethodCall<T, object?> CreateMethodCall<T>(MethodBase method)
         {
             DynamicMethod dynamicMethod = CreateDynamicMethod(method.ToString()!, typeof(object), new[] { typeof(object), typeof(object[]) }, method.DeclaringType!);
@@ -244,6 +246,7 @@ namespace Newtonsoft.Json.Utilities
             generator.Return();
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override Func<T> CreateDefaultConstructor<T>(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
             Type type)

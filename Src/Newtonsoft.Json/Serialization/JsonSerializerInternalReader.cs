@@ -955,6 +955,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private object? EnsureType(JsonReader reader, object? value, CultureInfo culture, JsonContract? contract, Type? targetType)
         {
             if (targetType == null)
@@ -2218,6 +2219,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private object? DeserializeConvertable(JsonConverter converter, JsonReader reader, Type objectType, object? existingValue)
         {
             if (TraceWriter != null && TraceWriter.LevelFilter >= TraceLevel.Info)
@@ -2591,6 +2593,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private void EndProcessProperty(object newObject, JsonReader reader, JsonObjectContract contract, int initialDepth, JsonProperty property, PropertyPresence presence, bool setDefaultValue)
         {
             if (presence == PropertyPresence.None || presence == PropertyPresence.Null)

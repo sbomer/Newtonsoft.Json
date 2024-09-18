@@ -56,6 +56,7 @@ namespace Newtonsoft.Json
     /// </summary>
     [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
     [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+    [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
     public class JsonValidatingReader : JsonReader, IJsonLineInfo
     {
         private class SchemaScope

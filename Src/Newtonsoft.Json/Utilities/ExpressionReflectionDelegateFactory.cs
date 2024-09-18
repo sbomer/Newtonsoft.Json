@@ -42,6 +42,7 @@ namespace Newtonsoft.Json.Utilities
 
         internal static ReflectionDelegateFactory Instance => _instance;
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override ObjectConstructor<object> CreateParameterizedConstructor(MethodBase method)
         {
             ValidationUtils.ArgumentNotNull(method, nameof(method));
@@ -58,6 +59,7 @@ namespace Newtonsoft.Json.Utilities
             return compiled;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override MethodCall<T, object?> CreateMethodCall<T>(MethodBase method)
         {
             ValidationUtils.ArgumentNotNull(method, nameof(method));
@@ -188,6 +190,7 @@ namespace Newtonsoft.Json.Utilities
             return callExpression;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override Func<T> CreateDefaultConstructor<T>(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
             Type type)
@@ -221,6 +224,7 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override Func<T, object?> CreateGet<T>(PropertyInfo propertyInfo)
         {
             ValidationUtils.ArgumentNotNull(propertyInfo, nameof(propertyInfo));
@@ -256,6 +260,7 @@ namespace Newtonsoft.Json.Utilities
             return compiled;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override Func<T, object?> CreateGet<T>(FieldInfo fieldInfo)
         {
             ValidationUtils.ArgumentNotNull(fieldInfo, nameof(fieldInfo));
@@ -280,6 +285,7 @@ namespace Newtonsoft.Json.Utilities
             return compiled;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override Action<T, object?> CreateSet<T>(FieldInfo fieldInfo)
         {
             ValidationUtils.ArgumentNotNull(fieldInfo, nameof(fieldInfo));
@@ -316,6 +322,7 @@ namespace Newtonsoft.Json.Utilities
             return compiled;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override Action<T, object?> CreateSet<T>(PropertyInfo propertyInfo)
         {
             ValidationUtils.ArgumentNotNull(propertyInfo, nameof(propertyInfo));

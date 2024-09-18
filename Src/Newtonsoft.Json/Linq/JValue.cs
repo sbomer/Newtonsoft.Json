@@ -728,6 +728,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/>s which will be used when writing the token.</param>
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
         {
             if (converters != null && converters.Length > 0 && _value != null)
@@ -985,6 +986,7 @@ namespace Newtonsoft.Json.Linq
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         private class JValueDynamicProxy : DynamicProxy<JValue>
         {
             public override bool TryConvert(JValue instance, ConvertBinder binder, [NotNullWhen(true)] out object? result)

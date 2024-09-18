@@ -74,6 +74,7 @@ namespace Newtonsoft.Json.Utilities
             return Members[member].MemberType!;
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static ReflectionObject Create(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.NonPublicConstructors |
@@ -89,6 +90,7 @@ namespace Newtonsoft.Json.Utilities
             return Create(t, null, memberNames);
         }
 
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         public static ReflectionObject Create(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.NonPublicConstructors |

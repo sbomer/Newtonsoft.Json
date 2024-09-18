@@ -287,6 +287,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
         [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
+        [RequiresDynamicCode(MiscellaneousUtils.AotWarning)]
         internal override void SerializeInternal(JsonWriter jsonWriter, object? value, Type? rootType)
         {
             if (_serializerWriter != null)
