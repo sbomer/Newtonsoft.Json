@@ -801,7 +801,7 @@ namespace Newtonsoft.Json.Linq
             return null;
         }
 
-        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] // TODO: should typedescriptor ones use a different RUC?
+        [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)]
         object? ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
             return null;
